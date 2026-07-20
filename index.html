@@ -132,7 +132,7 @@
     .button.secondary { color: var(--forest); background: transparent; }
     .button.secondary:hover { background: rgba(13, 38, 37, .06); box-shadow: none; }
     .button.light { color: var(--forest); background: var(--mint); border-color: var(--mint); }
-    .button:focus-visible, .tab:focus-visible, .nav-links a:focus-visible, .brand:focus-visible {
+    .button:focus-visible, .review-tab:focus-visible, .file-node:focus-visible, .evidence-jump:focus-visible, .nav-links a:focus-visible, .brand:focus-visible {
       outline: 3px solid var(--coral);
       outline-offset: 3px;
     }
@@ -261,58 +261,272 @@
 
     .demo-section { padding: 110px 0; color: #fffdf7; background: #111917; }
     .demo-section .section-head p { color: rgba(255,255,255,.66); }
-    .demo-shell { overflow: hidden; border: 1px solid var(--line-dark); background: #0a100f; box-shadow: 0 34px 90px rgba(0,0,0,.3); }
-    .demo-toolbar {
+    .demo-contract {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: -24px 0 26px;
+      border: 1px solid var(--line-dark);
+      background: #0d1513;
+    }
+    .contract-item { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 18px 20px; }
+    .contract-item + .contract-item { border-left: 1px solid var(--line-dark); }
+    .contract-badge {
+      align-self: start;
+      padding: 5px 8px;
+      border: 1px solid rgba(169,232,214,.38);
+      color: var(--mint);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .contract-item strong { display: block; font-size: 13px; }
+    .contract-item p { margin: 3px 0 0; color: #8f9b97; font-size: 12px; line-height: 1.45; }
+
+    .demo-shell {
+      overflow: hidden;
+      border: 1px solid #35423f;
+      border-radius: 7px;
+      background: #080d0c;
+      box-shadow: 0 34px 90px rgba(0,0,0,.34);
+    }
+    .ide-titlebar {
       min-height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 8px 12px 8px 20px;
-      border-bottom: 1px solid var(--line-dark);
-      background: #151e1c;
+      padding: 7px 10px 7px 18px;
+      border-bottom: 1px solid #35423f;
+      background: #18211f;
     }
-    .file-label { color: #aab5b1; font-family: var(--mono); font-size: 12px; }
-    .tabs { display: flex; gap: 4px; padding: 3px; background: #0a100f; border-radius: 5px; }
-    .tab {
+    .ide-title {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #a9b4b0;
+      font-family: var(--mono);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .window-dots { display: flex; gap: 6px; }
+    .window-dots i { width: 9px; height: 9px; border-radius: 50%; background: #5e6965; }
+    .window-dots i:first-child { background: #e7654f; }
+    .window-dots i:nth-child(2) { background: #d4a94e; }
+    .window-dots i:last-child { background: #58c9ae; }
+    .review-tabs { display: flex; gap: 4px; padding: 3px; background: #090e0d; border-radius: 5px; }
+    .review-tab {
       min-height: 44px;
-      padding: 0 14px;
+      padding: 0 16px;
       border: 0;
       border-radius: 3px;
       color: #aab5b1;
       background: transparent;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .review-tab[aria-selected="true"] { color: var(--forest); background: var(--mint); }
+
+    .ide-workbench {
+      display: grid;
+      grid-template-columns: 178px minmax(330px,.82fr) minmax(430px,1.18fr);
+      min-height: 790px;
+      background: #0a0f0e;
+    }
+    .ide-explorer { border-right: 1px solid #303b38; background: #111917; }
+    .explorer-head {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-bottom: 1px solid #303b38;
+      color: #aab5b1;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .file-tree { padding: 10px 7px 18px; }
+    .folder-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 7px;
+      color: #c7d0cd;
+      font-family: var(--mono);
+      font-size: 11px;
       font-weight: 800;
     }
-    .tab[aria-selected="true"] { color: var(--forest); background: var(--mint); }
-    .demo-grid { display: grid; grid-template-columns: .88fr 1.12fr; }
-    .code-panel { padding: 30px 26px 34px; border-right: 1px solid var(--line-dark); background: #0d1413; }
-    .panel-label { margin: 0 0 18px; color: #82908b; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
-    .code {
-      margin: 0;
-      color: #d9e1de;
+    .folder-label::before { content: "⌄"; color: #798682; }
+    .folder-label.depth-1 { padding-left: 21px; color: #929e9a; }
+    .file-node {
+      width: 100%;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px 5px 22px;
+      border: 0;
+      border-radius: 3px;
+      color: #98a5a0;
+      background: transparent;
+      cursor: pointer;
       font-family: var(--mono);
-      font-size: 13px;
-      line-height: 1.85;
-      white-space: pre-wrap;
+      font-size: 11px;
+      text-align: left;
     }
-    .line { display: block; padding: 0 8px; margin: 0 -8px; }
-    .line.bad { color: #ffb3a7; background: rgba(231, 101, 79, .12); }
-    .line.good { color: #b7eadc; }
-    .results-panel { padding: 30px 30px 34px; }
-    .result-head { display: flex; justify-content: space-between; gap: 18px; align-items: start; padding-bottom: 20px; border-bottom: 1px solid var(--line-dark); }
-    .result-head h3 { margin: 0; font-family: var(--display); font-size: 31px; font-weight: 500; letter-spacing: -.02em; }
-    .verdict { padding: 6px 9px; border: 1px solid rgba(231, 101, 79, .6); color: #ffb3a7; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .finding-list { display: grid; }
-    .finding { display: grid; grid-template-columns: 74px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line-dark); }
-    .severity { padding-top: 2px; color: var(--coral); font-family: var(--mono); font-size: 10px; font-weight: 900; text-transform: uppercase; }
-    .finding h4 { margin: 0; font-size: 15px; }
-    .finding p { margin: 5px 0 0; color: #aab5b1; font-size: 13px; line-height: 1.55; }
+    .file-node.depth-2 { padding-left: 36px; }
+    .file-node::before { content: "M"; color: #63cdb4; font-size: 9px; font-weight: 900; }
+    .file-node:hover { color: #eef3f1; background: #1a2522; }
+    .file-node[aria-current="true"] { color: #fff; background: #24332f; }
+
+    .ide-editor { min-width: 0; border-right: 1px solid #303b38; background: #0b1110; }
+    .editor-tabbar { min-height: 42px; display: flex; border-bottom: 1px solid #303b38; background: #101715; }
+    .editor-tab {
+      min-width: 145px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      border-top: 2px solid var(--mint-strong);
+      border-right: 1px solid #303b38;
+      color: #e2e8e5;
+      background: #0b1110;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+    .editor-tab::before { content: "M"; color: #63cdb4; font-size: 9px; font-weight: 900; }
+    .editor-breadcrumb {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border-bottom: 1px solid #232d2a;
+      color: #77837f;
+      font-family: var(--mono);
+      font-size: 10px;
+    }
+    .editor-scroll { max-height: 714px; overflow: auto; padding: 14px 0 30px; }
+    .code-row {
+      min-height: 24px;
+      display: grid;
+      grid-template-columns: 48px minmax(0,1fr);
+      border-left: 2px solid transparent;
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    .code-row .ln { padding-right: 12px; color: #4f5c58; text-align: right; user-select: none; }
+    .code-row .source { padding: 2px 18px 2px 8px; color: #cbd5d1; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .code-row.heading .source { color: #8de0cc; font-weight: 800; }
+    .code-row.list .source { color: #dce5e2; }
+    .code-row.evidence-focus { border-left-color: var(--coral); background: rgba(231,101,79,.14); }
+    .code-row.evidence-focus .ln { color: #ff8d79; }
+    .code-row.evidence-focus .source { color: #ffd1c8; }
+
+    .review-pane { min-width: 0; max-height: 790px; overflow-y: auto; background: #0d1413; }
+    .review-head {
+      position: sticky;
+      z-index: 3;
+      top: 0;
+      padding: 18px 20px 15px;
+      border-bottom: 1px solid #303b38;
+      background: rgba(13,20,19,.97);
+      backdrop-filter: blur(10px);
+    }
+    .review-headline { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+    .review-head h3 { margin: 0; font-family: var(--display); font-size: 28px; font-weight: 500; line-height: 1; letter-spacing: -.025em; }
+    .review-head p { margin: 6px 0 0; color: #8f9b97; font-size: 11px; }
+    .verdict { flex: 0 0 auto; padding: 5px 8px; border: 1px solid rgba(231,101,79,.6); color: #ff9b89; font-family: var(--mono); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .coverage-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px 13px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid #27312f;
+      color: #9aa6a2;
+      font-family: var(--mono);
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+    .coverage-strip strong { color: var(--mint); }
+    .finding-list { padding: 0 20px; }
+    .review-finding { padding: 18px 0; border-bottom: 1px solid #2d3835; }
+    .finding-topline { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+    .finding-number { color: #83908b; font-family: var(--mono); font-size: 9px; font-weight: 900; }
+    .finding-severity, .finding-label {
+      padding: 3px 6px;
+      border: 1px solid #3d4946;
+      color: #9ca8a4;
+      font-family: var(--mono);
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .finding-severity.critical { color: #ff9d8c; border-color: rgba(231,101,79,.56); }
+    .finding-severity.high { color: #f3c46e; border-color: rgba(243,196,110,.44); }
+    .finding-severity.medium { color: #9edecf; border-color: rgba(158,222,207,.34); }
+    .review-finding h4 { margin: 10px 0 0; color: #f2f5f4; font-size: 14px; line-height: 1.35; }
+    .review-finding p { margin: 8px 0 0; color: #9eaaa6; font-size: 11px; line-height: 1.55; }
+    .review-finding p strong { color: #dce4e1; }
+    .evidence-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .evidence-jump {
+      min-height: 32px;
+      padding: 3px 8px;
+      border: 1px solid #34413d;
+      border-radius: 3px;
+      color: #8edbc8;
+      background: #101a18;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 9px;
+    }
+    .evidence-jump:hover { color: #fff; border-color: var(--mint-strong); }
+    .quick-inventory { margin: 18px 20px 22px; padding: 16px; border: 1px solid #35423f; background: #111b19; }
+    .quick-inventory h4 { margin: 0; color: var(--mint); font-size: 12px; }
+    .quick-inventory p { margin: 4px 0 12px; color: #87938f; font-size: 10px; }
+    .inventory-row { display: grid; grid-template-columns: 34px 1fr auto; gap: 9px; padding: 9px 0; border-top: 1px solid #293431; color: #b6c0bc; font-size: 10px; }
+    .inventory-row span:first-child { color: #7f8c87; font-family: var(--mono); }
+    .inventory-row small { color: #8bd8c5; font-family: var(--mono); text-transform: uppercase; }
+    .full-assessment { margin: 22px 20px 26px; border: 1px solid #3b4945; background: #111b19; }
+    .assessment-head { padding: 15px 17px; border-bottom: 1px solid #33403c; }
+    .assessment-head span { color: var(--mint); font-family: var(--mono); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .assessment-head h4 { margin: 4px 0 0; font-family: var(--display); font-size: 23px; font-weight: 500; }
+    .assessment-block { padding: 15px 17px; border-bottom: 1px solid #2e3936; }
+    .assessment-block:last-child { border-bottom: 0; }
+    .assessment-block h5 { margin: 0; color: #e9efec; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+    .assessment-block p, .assessment-block ol { margin: 6px 0 0; color: #9aa6a2; font-size: 10px; line-height: 1.55; }
+    .assessment-block ol { padding-left: 17px; }
+    .assessment-block li + li { margin-top: 5px; }
+    .quick-only { display: block; }
     .full-only { display: none; }
+    .demo-shell[data-mode="quick"] .review-finding[data-rank="6"],
+    .demo-shell[data-mode="quick"] .review-finding[data-rank="7"],
+    .demo-shell[data-mode="quick"] .review-finding[data-rank="8"] { display: none; }
+    .demo-shell[data-mode="full"] .quick-only { display: none; }
     .demo-shell[data-mode="full"] .full-only { display: block; }
-    .architecture-read { margin-top: 22px; padding: 18px; color: #cbd6d2; background: var(--forest-2); border: 1px solid rgba(169, 232, 214, .2); font-size: 13px; }
-    .architecture-read strong { color: var(--mint); }
+    .ide-statusbar {
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 12px;
+      color: #08201b;
+      background: var(--mint-strong);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .status-group { display: flex; gap: 14px; }
     .demo-caption { margin: 14px 0 0; color: #89938f; font-size: 12px; text-align: right; }
 
     .method { background: var(--paper-deep); }
@@ -370,8 +584,10 @@
       .statement-grid, .section-head { gap: 26px; }
       .check-row { grid-template-columns: 48px 1fr; }
       .check-row p { grid-column: 2; }
-      .demo-grid { grid-template-columns: 1fr; }
-      .code-panel { border-right: 0; border-bottom: 1px solid var(--line-dark); }
+      .demo-contract { margin-top: 0; }
+      .ide-workbench { grid-template-columns: 175px minmax(0,1fr); }
+      .ide-editor { border-right: 0; }
+      .review-pane { grid-column: 1 / -1; max-height: none; border-top: 1px solid #303b38; }
       .method-copy { position: static; }
       .steps { grid-template-columns: 1fr; }
       .step { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -394,12 +610,30 @@
       .statement, .section, .demo-section, .boundary { padding: 78px 0; }
       .section-head { margin-bottom: 42px; }
       .check-row { grid-template-columns: 36px 1fr; gap: 15px; }
-      .demo-toolbar { align-items: stretch; flex-direction: column; padding: 14px; }
-      .tabs { width: 100%; }
-      .tab { flex: 1; }
-      .code-panel, .results-panel { padding: 22px 16px 25px; }
-      .result-head { align-items: start; flex-direction: column-reverse; }
-      .finding { grid-template-columns: 60px 1fr; }
+      .demo-contract { grid-template-columns: 1fr; }
+      .contract-item + .contract-item { border-left: 0; border-top: 1px solid var(--line-dark); }
+      .ide-titlebar { align-items: stretch; flex-direction: column; padding: 12px; }
+      .review-tabs { width: 100%; }
+      .review-tab { flex: 1; }
+      .ide-workbench { grid-template-columns: 1fr; }
+      .ide-explorer { border-right: 0; border-bottom: 1px solid #303b38; }
+      .file-tree { display: flex; flex-wrap: wrap; gap: 4px; }
+      .folder-label { width: 100%; }
+      .folder-label.depth-1 { display: none; }
+      .file-node, .file-node.depth-2 { width: auto; flex: 1 1 135px; min-height: 44px; padding-left: 10px; }
+      .ide-editor { border-bottom: 1px solid #303b38; }
+      .editor-scroll { max-height: 470px; }
+      .code-row { grid-template-columns: 36px minmax(0,1fr); font-size: 10px; }
+      .code-row .ln { padding-right: 8px; }
+      .code-row .source { padding-right: 10px; }
+      .review-head { position: static; }
+      .review-headline { align-items: start; flex-direction: column-reverse; }
+      .finding-list { padding: 0 15px; }
+      .quick-inventory, .full-assessment { margin-left: 15px; margin-right: 15px; }
+      .inventory-row { grid-template-columns: 30px 1fr; }
+      .inventory-row small { grid-column: 2; }
+      .evidence-jump { min-height: 44px; }
+      .ide-statusbar { align-items: flex-start; flex-direction: column; gap: 3px; padding: 8px 10px; }
       .tree-row { grid-template-columns: 1fr; gap: 7px; }
       .boundary-grid { grid-template-columns: 1fr; }
       .boundary-panel { min-height: 0; }
@@ -465,7 +699,7 @@
                 <div><strong>Vague completion test</strong><span>“Solid enough” gives no one a checkable finish line.</span></div>
               </div>
             </div>
-            <div class="memo-footer"><span>Readiness</span><strong>Revision required</strong></div>
+            <div class="memo-footer"><span>8 findings inventoried</span><strong>Revision required</strong></div>
           </article>
         </div>
       </div>
@@ -524,58 +758,174 @@
     <section class="demo-section" id="demo">
       <div class="shell">
         <header class="section-head reveal">
-          <p class="section-index">Small demonstration</p>
+          <p class="section-index">Working demonstration</p>
           <div>
-            <h2>One instruction file. Three decisions hiding inside it.</h2>
-            <p>Switch review depth to see how the response changes. Both modes inspect the complete relevant project; Full Review adds the complete architecture assessment.</p>
+            <h2>Inspect the project. Follow the evidence. Change the review depth.</h2>
+            <p>This fictional client-onboarding project contains seven relevant files and eight distinct material findings. Use the file explorer and evidence links like a real editor, then compare the two complete review contracts.</p>
           </div>
         </header>
 
-        <div class="demo-shell reveal" data-mode="quick" id="demo-shell">
-          <div class="demo-toolbar">
-            <span class="file-label">client-onboarding/CLAUDE.md</span>
-            <div class="tabs" role="tablist" aria-label="Review depth">
-              <button class="tab" id="quick-tab" type="button" role="tab" aria-selected="true" aria-controls="demo-results" data-mode="quick">Quick Review</button>
-              <button class="tab" id="full-tab" type="button" role="tab" aria-selected="false" aria-controls="demo-results" data-mode="full">Full Review</button>
-            </div>
+        <div class="demo-contract reveal" aria-label="Quick and Full Review contracts">
+          <div class="contract-item">
+            <span class="contract-badge">Quick</span>
+            <div><strong>Complete inventory, five priorities detailed.</strong><p>Cold Read inspects the whole relevant project, fully reports the five most consequential findings, and discloses anything remaining.</p></div>
           </div>
-          <div class="demo-grid">
-            <div class="code-panel" aria-label="Example source file">
-              <p class="panel-label">Target evidence</p>
-              <pre class="code"><code><span class="line good"># Client onboarding assistant</span>
-<span class="line">Research the client's market.</span>
-<span class="line bad">Move on once the research is solid enough.</span>
-<span class="line">Prepare a summary for the client.</span>
-<span class="line bad">Get the client's sign-off before sending.</span>
-<span class="line bad">Send the summary automatically when ready.</span>
-<span class="line bad">Charge the card on file after delivery.</span></code></pre>
-            </div>
-            <div class="results-panel" id="demo-results" role="tabpanel" aria-labelledby="quick-tab">
-              <div class="result-head">
-                <h3 id="mode-title">Quick Review · 3 findings</h3>
-                <span class="verdict">Revision required</span>
-              </div>
-              <div class="finding-list">
-                <article class="finding">
-                  <span class="severity">Critical</span>
-                  <div><h4>Missing responsibility</h4><p>The project can charge a client's card, but no rule requires a person's approval before money moves.</p></div>
-                </article>
-                <article class="finding">
-                  <span class="severity">High</span>
-                  <div><h4>Contradiction</h4><p>“Get sign-off before sending” and “send automatically” cannot both govern the same delivery.</p></div>
-                </article>
-                <article class="finding">
-                  <span class="severity">Medium</span>
-                  <div><h4>Unobservable rule</h4><p>“Solid enough” provides no evidence a fresh session can use to decide when research is complete.</p></div>
-                </article>
-              </div>
-              <div class="architecture-read full-only">
-                <strong>Architecture read:</strong> research and delivery are valid separate responsibilities, but the handoff has no checkable completion signal and the financial action has no human gate. Fix those ownership decisions; do not add another agent.
-              </div>
-            </div>
+          <div class="contract-item">
+            <span class="contract-badge">Full</span>
+            <div><strong>Every material finding, no fixed cap.</strong><p>The same project and inventory, with all eight findings detailed plus the complete architecture and handoff assessment.</p></div>
           </div>
         </div>
-        <p class="demo-caption">Illustrative demonstration—not a live AI response.</p>
+
+        <div class="demo-shell reveal" data-mode="quick" id="demo-shell">
+          <div class="ide-titlebar">
+            <div class="ide-title">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>client-onboarding — Cold Read workspace</span>
+            </div>
+            <div class="review-tabs" role="tablist" aria-label="Review depth">
+              <button class="review-tab" id="quick-tab" type="button" role="tab" aria-selected="true" aria-controls="demo-results" data-mode="quick">Quick Review</button>
+              <button class="review-tab" id="full-tab" type="button" role="tab" aria-selected="false" aria-controls="demo-results" data-mode="full">Full Review</button>
+            </div>
+          </div>
+
+          <div class="ide-workbench">
+            <aside class="ide-explorer" aria-label="Example project files">
+              <div class="explorer-head">Explorer</div>
+              <div class="file-tree">
+                <div class="folder-label">client-onboarding</div>
+                <button class="file-node" type="button" data-file="CLAUDE.md" aria-current="true">CLAUDE.md</button>
+                <div class="folder-label depth-1">workflows</div>
+                <button class="file-node depth-2" type="button" data-file="workflows/research.md">research.md</button>
+                <button class="file-node depth-2" type="button" data-file="workflows/delivery.md">delivery.md</button>
+                <button class="file-node depth-2" type="button" data-file="workflows/billing.md">billing.md</button>
+                <div class="folder-label depth-1">reference</div>
+                <button class="file-node depth-2" type="button" data-file="reference/client-tone.md">client-tone.md</button>
+                <button class="file-node" type="button" data-file="STATUS.md">STATUS.md</button>
+                <button class="file-node" type="button" data-file="progress.md">progress.md</button>
+              </div>
+            </aside>
+
+            <section class="ide-editor" id="source-pane" aria-label="Selected project file">
+              <div class="editor-tabbar"><div class="editor-tab" id="editor-tab">CLAUDE.md</div></div>
+              <div class="editor-breadcrumb" id="editor-breadcrumb">client-onboarding › CLAUDE.md</div>
+              <div class="editor-scroll" id="editor-code" aria-live="polite"></div>
+            </section>
+
+            <aside class="review-pane" id="demo-results" role="tabpanel" aria-labelledby="quick-tab" tabindex="0">
+              <div class="review-head">
+                <div class="review-headline">
+                  <div>
+                    <h3 id="mode-title">Quick Review</h3>
+                    <p id="mode-subtitle">5 priorities detailed · 3 remaining findings disclosed</p>
+                  </div>
+                  <span class="verdict">Revision required</span>
+                </div>
+                <div class="coverage-strip">
+                  <span><strong>8</strong> total findings</span>
+                  <span><strong>7</strong> relevant files inspected</span>
+                  <span><strong>0</strong> exclusions</span>
+                  <span>evidence complete</span>
+                </div>
+              </div>
+
+              <div class="finding-list" aria-label="Detailed findings">
+                <article class="review-finding" data-rank="1">
+                  <div class="finding-topline"><span class="finding-number">F01</span><span class="finding-severity critical">Critical</span><span class="finding-label">Contradiction</span></div>
+                  <h4>Client sign-off conflicts with automatic delivery.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="CLAUDE.md" data-line="7">CLAUDE.md:7</button><button class="evidence-jump" type="button" data-file="workflows/delivery.md" data-line="6">delivery.md:6</button></div>
+                  <p><strong>Why it fails:</strong> the root requires sign-off while the delivery contract sends as soon as it decides the summary is ready.</p>
+                  <p><strong>Consequence:</strong> client-facing work can leave without the promised human approval.</p>
+                  <p><strong>Builder decision:</strong> decide which surface owns sending and whether approval is mandatory before that action.</p>
+                </article>
+
+                <article class="review-finding" data-rank="2">
+                  <div class="finding-topline"><span class="finding-number">F02</span><span class="finding-severity critical">Critical</span><span class="finding-label">Missing responsibility</span></div>
+                  <h4>Payment has no human approval point.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="workflows/billing.md" data-line="4">billing.md:4</button></div>
+                  <p><strong>Why it fails:</strong> the project authorises a consequential financial action, but none of the seven relevant files assigns responsibility for approving it.</p>
+                  <p><strong>Consequence:</strong> a delivery decision can trigger a client charge without a person checking that it is valid.</p>
+                  <p><strong>Builder decision:</strong> decide what must be true, and who must agree, before money is allowed to move.</p>
+                </article>
+
+                <article class="review-finding" data-rank="3">
+                  <div class="finding-topline"><span class="finding-number">F03</span><span class="finding-severity high">High</span><span class="finding-label">Handoff gap</span></div>
+                  <h4>Research does not produce a recognisable delivery input.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="workflows/research.md" data-line="4">research.md:4</button><button class="evidence-jump" type="button" data-file="workflows/research.md" data-line="6">research.md:6</button><button class="evidence-jump" type="button" data-file="workflows/delivery.md" data-line="3">delivery.md:3</button></div>
+                  <p><strong>Why it fails:</strong> research says to save notes and pass a brief, but no accessible rule identifies the canonical artifact that delivery should recognise.</p>
+                  <p><strong>Consequence:</strong> a fresh session cannot tell which output is complete, current, or safe to continue from.</p>
+                  <p><strong>Builder decision:</strong> decide what information must cross the stage boundary and how the next task recognises it.</p>
+                </article>
+
+                <article class="review-finding" data-rank="4">
+                  <div class="finding-topline"><span class="finding-number">F04</span><span class="finding-severity high">High</span><span class="finding-label">Unobservable rule</span></div>
+                  <h4>“Solid enough” gives research no checkable finish line.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="CLAUDE.md" data-line="5">CLAUDE.md:5</button></div>
+                  <p><strong>Why it fails:</strong> nothing ties the phrase to required evidence, coverage, or a decision the research must support.</p>
+                  <p><strong>Consequence:</strong> two sessions can stop at different points and both claim to have followed the workflow.</p>
+                  <p><strong>Builder decision:</strong> define what someone must be able to observe before research is complete.</p>
+                </article>
+
+                <article class="review-finding" data-rank="5">
+                  <div class="finding-topline"><span class="finding-number">F05</span><span class="finding-severity high">High</span><span class="finding-label">Unobservable rule</span></div>
+                  <h4>The missing-data fallback is “use your judgment and continue.”</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="workflows/research.md" data-line="5">research.md:5</button></div>
+                  <p><strong>Why it fails:</strong> the fallback gives no boundary for when uncertainty is acceptable, disclosed, or escalated.</p>
+                  <p><strong>Consequence:</strong> unsupported market claims can flow into a client deliverable as if they were verified.</p>
+                  <p><strong>Builder decision:</strong> decide how uncertainty changes the output and when the workflow must stop or ask.</p>
+                </article>
+
+                <article class="review-finding" data-rank="6">
+                  <div class="finding-topline"><span class="finding-number">F06</span><span class="finding-severity medium">Medium</span><span class="finding-label">Contradiction</span></div>
+                  <h4>Two files assign incompatible client tones.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="CLAUDE.md" data-line="11">CLAUDE.md:11</button><button class="evidence-jump" type="button" data-file="reference/client-tone.md" data-line="3">client-tone.md:3</button></div>
+                  <p><strong>Why it fails:</strong> the root demands neutral language while the dedicated reference demands warm, conversational language.</p>
+                  <p><strong>Consequence:</strong> client voice depends on whichever file a session treats as authoritative.</p>
+                  <p><strong>Builder decision:</strong> choose one canonical owner for tone and resolve the incompatible direction.</p>
+                </article>
+
+                <article class="review-finding" data-rank="7">
+                  <div class="finding-topline"><span class="finding-number">F07</span><span class="finding-severity medium">Medium</span><span class="finding-label">Duplicated ownership</span></div>
+                  <h4>Run state is deliberately maintained in two root files.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="CLAUDE.md" data-line="14">CLAUDE.md:14</button><button class="evidence-jump" type="button" data-file="STATUS.md" data-line="3">STATUS.md:3</button><button class="evidence-jump" type="button" data-file="progress.md" data-line="3">progress.md:3</button></div>
+                  <p><strong>Why it fails:</strong> both files own the same current-stage and next-action responsibility, so neither is canonical.</p>
+                  <p><strong>Consequence:</strong> one update can leave two plausible but different answers about where work should resume.</p>
+                  <p><strong>Builder decision:</strong> decide which single surface owns resumable state and what the other is for, if anything.</p>
+                </article>
+
+                <article class="review-finding" data-rank="8">
+                  <div class="finding-topline"><span class="finding-number">F08</span><span class="finding-severity medium">Medium</span><span class="finding-label">Unproven behavior</span></div>
+                  <h4>The project claims it never sends an incomplete summary, but shows no proof.</h4>
+                  <div class="evidence-list"><button class="evidence-jump" type="button" data-file="workflows/delivery.md" data-line="8">delivery.md:8</button></div>
+                  <p><strong>Why it fails:</strong> this is a material “never” guarantee on client-facing behavior, yet the supplied project contains no example or test exercising the block.</p>
+                  <p><strong>Consequence:</strong> a reader cannot distinguish an enforced boundary from a sentence the workflow may ignore.</p>
+                  <p><strong>Builder decision:</strong> demonstrate the claimed refusal against an incomplete input before relying on it.</p>
+                </article>
+              </div>
+
+              <section class="quick-inventory quick-only" aria-label="Remaining Quick Review inventory">
+                <h4>Remaining inventory — disclosed, not hidden</h4>
+                <p>Quick Review stops full detail at five priorities. These three findings still belong to the same complete inventory.</p>
+                <div class="inventory-row"><span>F06</span><span>Conflicting client-tone authority</span><small>Medium · Contradiction</small></div>
+                <div class="inventory-row"><span>F07</span><span>Run state owned in two files</span><small>Medium · Duplicated ownership</small></div>
+                <div class="inventory-row"><span>F08</span><span>Incomplete-summary block is unproven</span><small>Medium · Unproven behavior</small></div>
+              </section>
+
+              <section class="full-assessment full-only" aria-label="Full Review architecture assessment">
+                <div class="assessment-head"><span>Full Review only</span><h4>Complete architecture assessment</h4></div>
+                <div class="assessment-block"><h5>Necessity read</h5><p>One root guide, three workflow contracts, and one shared tone reference are proportionate for this job. The project does not earn multiple agents. The second state file is excess rather than useful separation.</p></div>
+                <div class="assessment-block"><h5>Ownership, routing, and handoff</h5><p>Sending is governed by conflicting owners; payment approval is unowned; research-to-delivery continuity relies on an unnamed artifact; and resumable state has two owners. The missing architecture is decisions and canonical signals—not another agent.</p></div>
+                <div class="assessment-block"><h5>Prioritised action plan</h5><ol><li>Settle human authority over client sending and payment.</li><li>Make the research-to-delivery handoff recognisable to a fresh session.</li><li>Give research completion and uncertainty observable boundaries.</li><li>Choose canonical owners for tone and resumable state.</li><li>Demonstrate the claimed incomplete-summary refusal.</li></ol></div>
+                <div class="assessment-block"><h5>Next test</h5><p>Open the project in a fresh session halfway through a run. Using only these files, ask it to identify the current stage, locate the accepted research input, decide whether sending is authorised, and explain whether billing may proceed. Then test an incomplete summary to see whether delivery actually stops.</p></div>
+              </section>
+            </aside>
+          </div>
+
+          <div class="ide-statusbar">
+            <div class="status-group"><span>Cold Read · read only</span><span id="status-mode">Quick · 5 detailed / 8 total</span></div>
+            <div class="status-group"><span id="status-file">CLAUDE.md</span><span>7 files inspected</span></div>
+          </div>
+        </div>
+        <p class="demo-caption">Illustrative project-editor demonstration. The eight findings are complete for this fictional seven-file example; this is not a live AI response.</p>
       </div>
     </section>
 
@@ -616,7 +966,7 @@
           <article class="step">
             <span class="step-num">Step 03</span>
             <h3>Ask for a Quick or Full Review.</h3>
-            <p>Cold Read maps the complete relevant project first, then reports at the depth you choose.</p>
+            <p>Quick details five priorities and discloses the rest of the complete inventory. Full details every material finding with no fixed cap.</p>
           </article>
         </div>
       </div>
@@ -663,34 +1013,164 @@
 
   <script>
     (function () {
+      const projectFiles = {
+        "CLAUDE.md": [
+          "# Client onboarding assistant",
+          "",
+          "## Workflow",
+          "1. Research the client's market.",
+          "2. Move on once the research is solid enough.",
+          "3. Prepare a client summary.",
+          "4. Get the client's sign-off before sending.",
+          "5. Hand delivery to workflows/delivery.md.",
+          "",
+          "## Client tone",
+          "Use neutral, concise language in every client message.",
+          "",
+          "## State",
+          "Update STATUS.md and progress.md after every stage."
+        ],
+        "workflows/research.md": [
+          "# Research stage",
+          "",
+          "Gather market size, competitors, and positioning.",
+          "Save research notes when complete.",
+          "If market data is unavailable, use your judgment and continue.",
+          "Pass the finished brief to delivery."
+        ],
+        "workflows/delivery.md": [
+          "# Delivery stage",
+          "",
+          "Read the finished research brief.",
+          "Draft the client summary.",
+          "Check that every section is complete.",
+          "Send the summary automatically when ready.",
+          "Mark delivery complete.",
+          "The workflow never sends an incomplete summary.",
+          "Trigger billing after delivery."
+        ],
+        "workflows/billing.md": [
+          "# Billing stage",
+          "",
+          "Wait until delivery is marked complete.",
+          "Charge the card on file after delivery.",
+          "Record the payment result."
+        ],
+        "reference/client-tone.md": [
+          "# Client tone",
+          "",
+          "Use warm, conversational language.",
+          "Avoid internal terminology.",
+          "Prefer short paragraphs."
+        ],
+        "STATUS.md": [
+          "# Run status",
+          "",
+          "Record the current stage and next action here.",
+          "Current stage: research."
+        ],
+        "progress.md": [
+          "# Project progress",
+          "",
+          "Record the current stage and next action here.",
+          "Current stage: research."
+        ]
+      };
+
       const shell = document.getElementById('demo-shell');
       const result = document.getElementById('demo-results');
       const title = document.getElementById('mode-title');
-      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const subtitle = document.getElementById('mode-subtitle');
+      const statusMode = document.getElementById('status-mode');
+      const statusFile = document.getElementById('status-file');
+      const editorTab = document.getElementById('editor-tab');
+      const breadcrumb = document.getElementById('editor-breadcrumb');
+      const editorCode = document.getElementById('editor-code');
+      const modeTabs = Array.from(document.querySelectorAll('.review-tab'));
+      const fileNodes = Array.from(document.querySelectorAll('.file-node'));
+      const evidenceLinks = Array.from(document.querySelectorAll('.evidence-jump'));
+
+      function fileName(path) {
+        return path.split('/').pop();
+      }
+
+      function renderFile(path, focusLine) {
+        const lines = projectFiles[path];
+        if (!lines) return;
+        editorCode.replaceChildren();
+
+        lines.forEach((text, index) => {
+          const row = document.createElement('div');
+          const number = index + 1;
+          row.className = 'code-row';
+          if (text.startsWith('#')) row.classList.add('heading');
+          if (/^\d+\./.test(text)) row.classList.add('list');
+          if (number === focusLine) row.classList.add('evidence-focus');
+          row.dataset.line = String(number);
+
+          const lineNumber = document.createElement('span');
+          lineNumber.className = 'ln';
+          lineNumber.textContent = String(number);
+          lineNumber.setAttribute('aria-hidden', 'true');
+
+          const source = document.createElement('span');
+          source.className = 'source';
+          source.textContent = text || ' ';
+
+          row.append(lineNumber, source);
+          editorCode.appendChild(row);
+        });
+
+        editorTab.textContent = fileName(path);
+        breadcrumb.textContent = 'client-onboarding › ' + path.replaceAll('/', ' › ');
+        statusFile.textContent = path;
+        fileNodes.forEach((node) => node.setAttribute('aria-current', String(node.dataset.file === path)));
+
+        const focused = focusLine ? editorCode.querySelector('[data-line="' + focusLine + '"]') : null;
+        editorCode.scrollTop = focused ? Math.max(0, focused.offsetTop - 120) : 0;
+      }
 
       function setMode(mode) {
+        const full = mode === 'full';
         shell.dataset.mode = mode;
-        tabs.forEach((tab) => {
+        modeTabs.forEach((tab) => {
           const active = tab.dataset.mode === mode;
           tab.setAttribute('aria-selected', String(active));
           tab.setAttribute('tabindex', active ? '0' : '-1');
         });
         result.setAttribute('aria-labelledby', mode + '-tab');
-        title.textContent = mode === 'full' ? 'Full Review · 3 findings + architecture read' : 'Quick Review · 3 findings';
+        title.textContent = full ? 'Full Review' : 'Quick Review';
+        subtitle.textContent = full
+          ? '8 of 8 material findings detailed · complete architecture assessment'
+          : '5 priorities detailed · 3 remaining findings disclosed';
+        statusMode.textContent = full ? 'Full · 8 detailed / 8 total' : 'Quick · 5 detailed / 8 total';
+        result.scrollTop = 0;
       }
 
-      tabs.forEach((tab, index) => {
+      modeTabs.forEach((tab, index) => {
         tab.addEventListener('click', () => setMode(tab.dataset.mode));
         tab.addEventListener('keydown', (event) => {
           if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
           event.preventDefault();
           const direction = event.key === 'ArrowRight' ? 1 : -1;
-          const next = tabs[(index + direction + tabs.length) % tabs.length];
+          const next = modeTabs[(index + direction + modeTabs.length) % modeTabs.length];
           next.focus();
           setMode(next.dataset.mode);
         });
       });
 
+      fileNodes.forEach((node) => {
+        node.addEventListener('click', () => renderFile(node.dataset.file));
+      });
+
+      evidenceLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          renderFile(link.dataset.file, Number(link.dataset.line));
+        });
+      });
+
+      renderFile('CLAUDE.md');
+      setMode('quick');
     }());
   </script>
 </body>
