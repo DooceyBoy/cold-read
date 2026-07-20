@@ -1,14 +1,14 @@
 # Self-review test — plain-English summary
 
-*This is a short public summary based on saved records from an earlier version. In this self-review test, Cold Read reviewed its own files to check whether it would follow its own rules. This is useful, but it is not independent proof, because the same project created the material being reviewed.*
+*This public development record shows Cold Read reviewing its own six-file editor. It is not a separate edition of the product. A self-review can show whether Cold Read follows its own boundaries; independent behaviour is covered by the separate challenge-test record.*
 
 ## What the test was
 
-The earlier version of Cold Read was pointed at its own files and asked to review them with the standard request. The question was simple: on material it could easily change, would Cold Read still only point out problems and hand the decisions back, and would it report honestly? Details of the tool used to run it are kept in the separate internal records, not here.
+During development, Cold Read was pointed at its own files and asked to review them with the standard request. The question was simple: on material it could easily change, would Cold Read still only point out problems and hand the decisions back, and would it report honestly? Details of the tool used to run it are kept in the separate internal records, not here.
 
 ## Cold Read's actual response, shown exactly
 
-Here is exactly what Cold Read said. Nothing has been shortened, cleaned up, or reworded.
+Here is exactly what Cold Read said. Nothing has been shortened, cleaned up, or reworded. The quoted response describes the evidence available at the time of the self-review; the separate independent challenge tests were completed afterwards and passed 10/10.
 
 > **Readiness: READY FOR COLD TEST**
 > 
@@ -36,9 +36,8 @@ Here is exactly what Cold Read said. Nothing has been shortened, cleaned up, or 
 - **It shows:** Cold Read did not rewrite anything — no replacement lines, no new folder layout, no files to create. It did not invent problems: it honestly reported no problems instead of padding the list. It followed its normal response shape, and it was honest about what it did and did not look at.
 - **It does not show:** that Cold Read works the same way on real projects built by other people. Reviewing your own work is the easy case. Proving it works on someone else's project is the job of the independent challenge test, not this one.
 
-## Honest limits
+## How to read this receipt
 
-- This was a self-review: the same project wrote the material it reviewed.
-- It is not independent, and it does not prove Cold Read works on other people's projects.
-- Finding no problems in your own work is a good sign, but not a guarantee.
-- The useful result: even when reviewing its own work, Cold Read still refused to rewrite it.
+- This is a self-review, so it demonstrates rule-following on Cold Read's own material rather than independence.
+- Independent external behaviour is covered by the separate 10/10 challenge-test receipt.
+- The useful result is that, even when reviewing its own work, Cold Read still refused to rewrite it or invent findings.

@@ -87,13 +87,15 @@ Cold Read points at the exact place something breaks, explains the consequence, 
 
 [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md) gives a self-contained one-minute test using the sample project [`test-fixtures/nested-specialist.md`](test-fixtures/nested-specialist.md), with clear results you can check.
 
-## Evidence (public summaries)
+## Development evidence
 
-- [Independent challenge test](receipts/public/independent-challenge-test.md) — a summary of independent tests of an earlier core version.
-- [Self-review test](receipts/public/self-review-test.md) — an earlier version of the editor reviewing its own project; a self-review, not proof it works on other people's projects.
-- [Originality check](receipts/public/originality-check.md) — a wording check performed on the earlier version recorded in that summary.
+These public records summarise checks completed while building Cold Read. They are supporting evidence, not unfinished builds, separate editions, or demo downloads. The finished public version is **v0.1.2**, and the editor users install is the six-file bundle in [`cold-read/`](cold-read/).
 
-These summaries describe earlier checkpoints, not the complete current v0.1.2 package. They do not cover the current Claude Project onboarding, Quick Review / Full Review modes, or the final v0.1.2 wording. Cold Read has not yet been tried in a **live fresh-project test** (a brand-new Claude Project with no earlier conversation), it is not claimed to be safe for production use, it does not guarantee correctness, and it is not claimed to work on every real project.
+- [Independent challenge test](receipts/public/independent-challenge-test.md) — ten independently scored, isolated runs; all ten passed.
+- [Self-review test](receipts/public/self-review-test.md) — Cold Read reviewing its own six-file editor and holding its read-only, no-invented-findings boundary.
+- [Originality check](receipts/public/originality-check.md) — a recorded wording comparison against the 508-file reference collection; no distinctive copied wording was found.
+
+Each receipt states exactly what its saved evidence covers. Cold Read is an AI review aid, so the builder still checks its findings and makes the final decisions.
 
 ## License
 

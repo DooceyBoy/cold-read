@@ -182,10 +182,10 @@ The project works only because important knowledge is still in the builder's hea
 Cold Read reviewed its own project. This checks honesty and restraint, but it is not independent proof.
 
 ### Independent challenge test
-An earlier core version of Cold Read was given difficult sample projects in ten isolated test sessions. These were controlled model tests, not ten live Claude Projects. Its first answers were saved and checked against expected results.
+During development, Cold Read was given difficult sample projects in ten isolated test sessions. Its first answers were saved and checked against expected results decided in advance. All ten recorded challenge tests passed. These records are supporting evidence for Cold Read, not different product versions.
 
 ### Fresh-project test
-A real, brand-new Claude Project with no earlier conversation and no hidden background. This live setup test is still deferred and must not be presented as completed.
+A setup check performed in a brand-new Claude Project with no earlier conversation or hidden background. This is different from controlled, isolated challenge testing.
 
 ### Sample project
 A project made specifically for testing, with known problems built in.

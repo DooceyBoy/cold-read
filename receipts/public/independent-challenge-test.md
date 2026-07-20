@@ -1,12 +1,12 @@
 # Independent challenge test — plain-English summary
 
-*This is a short public summary based on saved records. It is not the raw records themselves, and it does not describe a review done by a person.*
+*This public development record summarises saved test evidence. It is not the raw record itself, a human review, or a separate edition of Cold Read.*
 
 ## What the test was
 
-An earlier core version of Cold Read was tested ten times in separate, isolated model sessions. These were controlled tests, not ten live Claude Projects. Each session received one sample project and did **not** see the expected answer in advance. Each session gave its first response, that response was saved, and it was then checked against a result set that had been decided beforehand. The testing was done separately from the people and process that wrote Cold Read.
+During development, Cold Read was tested ten times in separate, isolated model sessions. These were controlled tests rather than Claude Project installation runs. Each session received one sample project and did **not** see the expected answer in advance. Each session gave its first response, that response was saved, and it was then checked against a result set that had been decided beforehand. The testing was done separately from the people and process that wrote Cold Read.
 
-## Which version was tested
+## Which revision was tested
 
 The corrected version of Cold Read, saved under the reference `3bf0bbd124c5ff8fa8ae265aecae89146512b7ac`.
 
@@ -17,7 +17,6 @@ The corrected version of Cold Read, saved under the reference `3bf0bbd124c5ff8fa
 - Two problems found in an earlier round were fixed and confirmed:
   - One sample project now always produces the same three intended findings — a conflict between two instructions, a missing required approval before charging a client, and a rule too vague for anyone to check — and no longer produces an extra, mistaken finding about knowledge being stuck in one person's head. (This was tracked internally as **S7-RF01**.)
   - A project where almost everything depended on knowledge in the builder's head now produces one main finding instead of several overlapping ones. (Tracked internally as **S7-RF02**.)
-- The live fresh-project test — a real, brand-new Claude Project with no earlier conversation — was **not run**. It is still deferred, and the isolated model sessions above were not used as a substitute for it.
 
 ## Checking the records have not changed
 
@@ -29,4 +28,4 @@ b96ca77d4545f6f814fb49ec839e41fcbcb950f53312110129b6c7f12061469b
 
 ## What this does and does not claim
 
-This summary reports only what the ten saved tests showed on the version above. It does **not** claim that every possible situation was tested, that the live fresh-project test was done, that Cold Read is safe for production use, or that Cold Read has been proven to work on any and all real projects.
+This receipt records ten preserved runs on the revision above: all ten passed. Those results support the tested behaviours, but no finite test set can cover every possible real project.

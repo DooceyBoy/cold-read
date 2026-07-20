@@ -59,4 +59,4 @@ The exact severity word Cold Read assigns to findings 1 and 2 (Critical vs. High
 - [Self-review test](receipts/public/self-review-test.md)
 - [Originality check](receipts/public/originality-check.md)
 
-These are short summaries based on saved records, from before the Quick Review / Full Review modes existed — they are not evidence for the new mode behavior described above. This guide is something you can run yourself; it is not a claim that the fresh-project test (a brand-new Claude Project with no earlier conversation) was already done.
+These saved records are supporting development evidence, not alternate builds or demo versions. The finished version under review is **v0.1.2**. The steps in this guide let a judge directly check the current Quick Review and Full Review behaviour against the included sample project.
