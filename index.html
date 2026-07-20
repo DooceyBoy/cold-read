@@ -529,6 +529,92 @@
     .status-group { display: flex; gap: 14px; }
     .demo-caption { margin: 14px 0 0; color: #89938f; font-size: 12px; text-align: right; }
 
+    .scope-demo-section { padding: 0 0 120px; scroll-margin-top: 82px; }
+    .scope-demo-section .section-head { margin-bottom: 36px; }
+    .scope-mode {
+      padding: 7px 10px;
+      border: 1px solid #46534f;
+      color: #aeb9b5;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .scope-workbench {
+      display: grid;
+      grid-template-columns: minmax(220px,.34fr) minmax(0,1fr);
+      min-height: 540px;
+      background: #0a0f0e;
+    }
+    .scope-file {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px 5px 22px;
+      color: #98a5a0;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+    .scope-file.depth-2 { padding-left: 36px; }
+    .scope-file::before {
+      content: attr(data-kind);
+      min-width: 18px;
+      color: #63cdb4;
+      font-size: 8px;
+      font-weight: 900;
+      text-align: center;
+    }
+    .scope-file[data-kind="PY"]::before { color: #f3c46e; }
+    .scope-review { min-width: 0; background: #0d1413; }
+    .scope-review-head {
+      padding: 22px clamp(20px,3vw,34px) 18px;
+      border-bottom: 1px solid #303b38;
+      background: #101816;
+    }
+    .scope-review-headline { display: flex; align-items: start; justify-content: space-between; gap: 18px; }
+    .scope-review-head h3 { margin: 0; color: #f2f5f4; font-family: var(--display); font-size: clamp(30px,3vw,42px); font-weight: 500; line-height: 1; letter-spacing: -.03em; }
+    .scope-review-head p { margin: 7px 0 0; color: #8f9b97; font-size: 11px; }
+    .scope-verdict {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border: 1px solid rgba(243,196,110,.62);
+      color: #f3c46e;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .scope-coverage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 15px;
+      padding-top: 13px;
+      border-top: 1px solid #2b3532;
+      color: #9aa6a2;
+      font-family: var(--mono);
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+    .scope-coverage strong { color: var(--mint); }
+    .scope-message { max-width: 820px; padding: clamp(26px,4vw,48px); }
+    .scope-message h4 { margin: 0 0 18px; color: #eef3f1; font-size: 18px; }
+    .scope-message > p { margin: 0 0 15px; color: #aab5b1; font-size: 13px; line-height: 1.72; }
+    .scope-message > p strong { color: #e5ebe8; }
+    .scope-stop {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #3b4945;
+      border-left: 3px solid var(--mint-strong);
+      background: #111b19;
+    }
+    .scope-stop span { display: block; color: var(--mint); font-family: var(--mono); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .scope-stop strong { display: block; margin-top: 8px; color: #f0f4f2; font-size: 14px; }
+    .scope-stop p { margin: 7px 0 0; color: #909d98; font-size: 11px; line-height: 1.6; }
+
     .method { background: var(--paper-deep); }
     .method-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(50px, 8vw, 120px); align-items: start; }
     .method-copy { position: sticky; top: 110px; }
@@ -588,6 +674,7 @@
       .ide-workbench { grid-template-columns: 175px minmax(0,1fr); }
       .ide-editor { border-right: 0; }
       .review-pane { grid-column: 1 / -1; max-height: none; border-top: 1px solid #303b38; }
+      .scope-workbench { grid-template-columns: 190px minmax(0,1fr); }
       .method-copy { position: static; }
       .steps { grid-template-columns: 1fr; }
       .step { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -608,19 +695,27 @@
       .memo::before { top: 19px; right: 19px; }
       .memo-wrap::before { width: 260px; height: 260px; right: -60px; }
       .statement, .section, .demo-section, .boundary { padding: 78px 0; }
+      .scope-demo-section { padding: 0 0 78px; }
       .section-head { margin-bottom: 42px; }
       .check-row { grid-template-columns: 36px 1fr; gap: 15px; }
       .demo-contract { grid-template-columns: 1fr; }
       .contract-item + .contract-item { border-left: 0; border-top: 1px solid var(--line-dark); }
       .ide-titlebar { align-items: stretch; flex-direction: column; padding: 12px; }
+      .scope-mode { align-self: flex-start; }
       .review-tabs { width: 100%; }
       .review-tab { flex: 1; }
       .ide-workbench { grid-template-columns: 1fr; }
+      .scope-workbench { grid-template-columns: 1fr; }
       .ide-explorer { border-right: 0; border-bottom: 1px solid #303b38; }
       .file-tree { display: flex; flex-wrap: wrap; gap: 4px; }
       .folder-label { width: 100%; }
       .folder-label.depth-1 { display: none; }
       .file-node, .file-node.depth-2 { width: auto; flex: 1 1 135px; min-height: 44px; padding-left: 10px; }
+      .scope-file, .scope-file.depth-2 { flex: 1 1 135px; min-height: 40px; padding-left: 10px; }
+      #scope-demo .file-tree { display: block; }
+      #scope-demo .folder-label.depth-1 { display: flex; }
+      #scope-demo .scope-file { width: 100%; min-height: 34px; padding-left: 22px; }
+      #scope-demo .scope-file.depth-2 { padding-left: 36px; }
       .ide-editor { border-bottom: 1px solid #303b38; }
       .editor-scroll { max-height: 470px; }
       .code-row { grid-template-columns: 36px minmax(0,1fr); font-size: 10px; }
@@ -628,6 +723,8 @@
       .code-row .source { padding-right: 10px; }
       .review-head { position: static; }
       .review-headline { align-items: start; flex-direction: column-reverse; }
+      .scope-review-headline { align-items: start; flex-direction: column-reverse; }
+      .scope-message { padding: 26px 18px 30px; }
       .finding-list { padding: 0 15px; }
       .quick-inventory, .full-assessment { margin-left: 15px; margin-right: 15px; }
       .inventory-row { grid-template-columns: 30px 1fr; }
@@ -929,6 +1026,80 @@
       </div>
     </section>
 
+    <section class="scope-demo-section" id="scope-example">
+      <div class="shell">
+        <header class="section-head reveal">
+          <p class="section-index">Boundary demonstration</p>
+          <div>
+            <h2>Not every folder is an AI system.</h2>
+            <p>Cold Read is for folder-based AI systems, including ICM projects. When an ordinary engineering folder has no root instructions, AI purpose, routing, or context layer, it stops instead of inventing an architecture to criticise.</p>
+          </div>
+        </header>
+
+        <div class="demo-shell reveal" id="scope-demo">
+          <div class="ide-titlebar">
+            <div class="ide-title">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>engineering-notes — Cold Read scope check</span>
+            </div>
+            <span class="scope-mode">No review mode requested</span>
+          </div>
+
+          <div class="scope-workbench">
+            <aside class="ide-explorer" aria-label="Ordinary engineering folder">
+              <div class="explorer-head">Explorer</div>
+              <div class="file-tree" role="list">
+                <div class="folder-label">engineering-notes</div>
+                <div class="scope-file" role="listitem" data-kind="M">README.md</div>
+                <div class="folder-label depth-1">docs</div>
+                <div class="scope-file depth-2" role="listitem" data-kind="M">architecture.md</div>
+                <div class="scope-file depth-2" role="listitem" data-kind="M">API.md</div>
+                <div class="folder-label depth-1">src</div>
+                <div class="scope-file depth-2" role="listitem" data-kind="PY">data_pipeline.py</div>
+                <div class="folder-label depth-1">tests</div>
+                <div class="scope-file depth-2" role="listitem" data-kind="PY">test_pipeline.py</div>
+              </div>
+            </aside>
+
+            <article class="scope-review" aria-labelledby="scope-result-title">
+              <div class="scope-review-head">
+                <div class="scope-review-headline">
+                  <div>
+                    <h3 id="scope-result-title">Scope check</h3>
+                    <p>0 findings · stopped before architecture judgments</p>
+                  </div>
+                  <span class="scope-verdict">Out of scope</span>
+                </div>
+                <div class="scope-coverage" aria-label="Scope-check coverage">
+                  <span><strong>5</strong> files inspected</span>
+                  <span><strong>0</strong> AI instruction files</span>
+                  <span><strong>0</strong> findings produced</span>
+                </div>
+              </div>
+
+              <div class="scope-message">
+                <h4>No AI-operating intent is present.</h4>
+                <p>There is no root instruction file, no <strong>CLAUDE.md</strong>, no routing or context layer, no stated purpose, and nothing in the tree that establishes an AI-operating intent.</p>
+                <p>This is a folder of engineering content, not a folder-based AI system. Cold Read reviews the architecture that turns a folder into an AI-run system: routing, ownership, rules, gates, and handoffs.</p>
+                <p>With no instruction layer present at all, there is no relevant architecture to inspect. Applying those judgments to a document and code repository would invent an architecture that is not there.</p>
+                <div class="scope-stop">
+                  <span>What Cold Read does next</span>
+                  <strong>Stops. No Quick/Full question. No fabricated findings.</strong>
+                  <p>An ordinary folder is not marked as badly designed just because it was never intended to operate an AI specialist.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="ide-statusbar">
+            <div class="status-group"><span>Cold Read · read only</span><span>Out of scope · terminal state</span></div>
+            <div class="status-group"><span>engineering-notes</span><span>No AI system detected</span></div>
+          </div>
+        </div>
+        <p class="demo-caption">Illustrative boundary example based on an observed Cold Read response. No files are modified.</p>
+      </div>
+    </section>
+
     <section class="section method" id="method">
       <div class="shell method-layout">
         <div class="method-copy reveal">
@@ -995,7 +1166,7 @@
           <a class="button" href="https://github.com/DooceyBoy/cold-read/releases/download/cold-read-v0.1.2/cold-read-public-v0.1.2.zip">Download Cold Read</a>
           <a class="button secondary" href="https://github.com/DooceyBoy/cold-read" target="_blank" rel="noreferrer">Read the GitHub guide <span aria-hidden="true">↗</span></a>
         </div>
-        <p class="evidence-note">Cold Read v0.1.2 is open source under the MIT License. Public evidence summaries describe earlier checkpoints; a live fresh-project test in a brand-new Claude Project remains deferred. No production-safety or universal-correctness claim is made.</p>
+        <p class="evidence-note">Cold Read v0.1.2 is the finished public version and is open source under the MIT License. Its public evidence summaries record checks completed during development; they are supporting records, not alternate editions or demo downloads.</p>
       </div>
     </section>
   </main>
