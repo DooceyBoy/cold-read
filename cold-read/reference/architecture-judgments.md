@@ -1,6 +1,6 @@
 # reference/architecture-judgments.md
 
-The ten things you look at when you judge a project's context architecture. Consult this after the Necessity Engine has told you what the project actually needs (see `rules.md`, Steps 2–3). Each judgment below says what a real problem looks like **and** where its limit is — the case where the thing you might flag is actually correct. Honor the limits; they are what keep you from selling architecture nobody needs.
+The ten things you look at when you judge a project's context architecture, plus the knowledge behind recommending agents, ownership, and routing conceptually rather than building them. Consult the ten judgments after the Necessity Engine has told you what the project actually needs (see `rules.md`, Step 4), and consult the closing sections when you reach Step 10's architecture advice. Each judgment below says what a real problem looks like **and** where its limit is — the case where the thing you might flag is actually correct. Honor the limits; they are what keep you from selling architecture nobody needs.
 
 This file is knowledge, not procedure. It does not restate the intake sequence, the output shape, or the anti-rewrite rule — those live in `rules.md`.
 
@@ -103,3 +103,29 @@ This file is knowledge, not procedure. It does not restate the intake sequence, 
 **A real problem looks like:** a project that only works because the builder remembers how it is meant to run; a README that says "run the normal workflow" without naming the first step, the required input, or the expected output; or key decisions that live only in the builder's memory.
 
 **The limit:** a disposable, single-user experiment needs almost no handoff surface, and demanding documentation for an audience it does not have is a mistake. Handoff need rises with duration, collaborators, consequence, and reuse. Judge against the audience the project actually has.
+
+---
+
+## Folders over agents — the agent-earning test
+
+An agent is warranted only when a genuinely different mode of work, a genuinely different audience, or a genuinely different tool surface needs its own instruction context that the root or a sibling stage cannot cleanly hold. Before recommending that a project add, split, or keep an agent, ask:
+
+- Could a plain folder with a local contract file do this, with no separate identity or persona needed?
+- Could a deterministic rule, permission, or gate replace the judgment call the agent would otherwise make? A decision that can be checked exactly should be checked exactly, not delegated to AI discretion (the 60/30/10 bias: prefer code and rule-based logic over model judgment wherever the task allows it).
+- Does splitting the work across agents introduce a handoff, an ownership question, or a cycle-risk that a single stage would not have had?
+- Is the project already disposable or single-user, such that the coordination overhead of multiple agents costs more than it returns?
+
+**A real problem looks like:** a single, reversible, low-stakes task wrapped in a coordinator agent and two specialist agents, each holding a near-identical copy of the same instructions; or, conversely, three materially different jobs — each with its own audience, inputs, and risk profile — crammed into one agent that has to guess which mode it is in on every task.
+
+**The limit:** agent count is never itself a maturity signal. A project with zero agents can be exactly right for its purpose; a project with five can be exactly right for a different purpose. Judge whether each agent's existence is earned by a real difference in mode, audience, or tool surface — not by whether "more structure" would look more thorough in a review.
+
+When you recommend for or against an agent in Step 10's analysis, name the responsibility, the ownership, and the relationship it would have to the rest of the project — never the finished prompt, persona, or file that would create it.
+
+---
+
+## Recommending without rewriting — how far architecture advice goes
+
+Step 10 lets you diagnose and recommend conceptual structure: what a project's ownership, routing, handoff, gate, reference, and agent relationships should be. The judgments above are the knowledge you draw on to make that recommendation specific to a real project instead of generic advice. Two limits keep this from sliding into building:
+
+- **Name the relationship, not the artifact.** "The fee-charge step and the send-to-client step both need a human approval point, and right now neither has one" is a recommendation. A drafted approval-gate file, a named folder for it, or wording for the check is construction — stop before that line.
+- **Earn every recommendation from this project's actual necessity read (`rules.md`, Step 4), not from a generic best-practice reflex.** A recommendation that would apply verbatim to almost any project is a sign you have not actually looked at this one's needs. Tie every architecture recommendation to the specific gap or excess you observed, with its location and consequence, the same discipline every other finding is held to.
