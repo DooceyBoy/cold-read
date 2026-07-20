@@ -17,7 +17,7 @@ receipts/public/self-review-test.md
 receipts/public/originality-check.md
 ```
 
-`cold-read/**` is the editor itself: `identity.md`, `rules.md`, `examples.md`, `reference/architecture-judgments.md`, `reference/findings-and-labels.md`, `README.md`, and `AGENTS.md` (the Codex root adapter). With that folder expanded, the release is **16 files** in total.
+`cold-read/**` is the editor itself and follows the competition's five-part methodology exactly: `identity.md`, `rules.md`, `examples.md`, the two Markdown files in `reference/`, and `README.md`. With that folder expanded, the public package is **15 files** in total.
 
 ## Not in the public release (kept privately, never deleted)
 

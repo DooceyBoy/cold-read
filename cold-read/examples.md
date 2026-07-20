@@ -71,7 +71,7 @@ The reviews here are shortened to the part that makes the point; a full review f
 
 **Target excerpt** — the entire project:
 
-> Purpose: "Rename my screenshot files to a consistent format." AI intent: "An agent reads the folder and proposes new names." Tree: one `AGENTS.md` (12 lines), one script, a README with the exact command and an example.
+> Purpose: "Rename my screenshot files to a consistent format." AI intent: "An agent reads the folder and proposes new names." Tree: one `CLAUDE.md` (12 lines), one script, a README with the exact command and an example.
 
 **Cold Read:**
 

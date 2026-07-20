@@ -10,63 +10,44 @@ New to this? Start with the **[plain-English guide](PLAIN_ENGLISH_GUIDE.md)** �
 
 ## What's in the public package
 
-The editor you install is the [`cold-read/`](cold-read/) folder. The **public package** — the exact list is in the [public file list](PUBLIC_PACKAGE_MANIFEST.md) — is that editor plus this README, a Judge Guide, the plain-English guide, the license, one sample project used for testing, and short public test summaries, and nothing else (16 files in total). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
+The editor you install is the [`cold-read/`](cold-read/) folder. It contains exactly the competition's five required parts: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The **public package** — the exact list is in the [public file list](PUBLIC_PACKAGE_MANIFEST.md) — is that editor plus this repository's judge guide, plain-English guide, license, one sample project, and short public test summaries, and nothing else (15 files in total). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
 
-## The easy way to run it (no technical background needed)
+## How to run it in Claude Projects
 
-This is the recommended path if you have never used GitHub, VS Code, or Codex before. You do not need to prepare a project-purpose statement, an "AI-operating intent" description, a project tree, `# TARGET:` file headers, or one big pasted packet — Cold Read will ask you a plain question if it genuinely needs to know something.
+This is the competition's intended route: put the Cold Read editor folder into a Claude Project, then give that Project something to critique.
 
-**1. Download the Cold Read folder.**
+**1. Download the editor folder.**
 
-Open this page: `https://github.com/DooceyBoy/cold-read/tree/main/cold-read`
+Open `https://github.com/DooceyBoy/cold-read/tree/main/cold-read`. To download just that folder, open `https://download-directory.github.io/`, paste the GitHub folder address into the box, press Enter, and extract the downloaded ZIP.
 
-Then open this tool in a new tab: `https://download-directory.github.io/`
+The extracted editor must keep this exact five-part shape:
 
-Paste the GitHub page's address into the box labelled **"Paste GitHub.com folder URL + press Enter"** and press Enter. A file starts downloading — this is a ZIP file, which is just a folder squeezed down for downloading. Find it (usually in your Downloads folder), then right-click it and choose "Extract All" (Windows) or double-click it (Mac) to turn it back into a normal folder.
-
-**2. Open the extracted `cold-read` folder in VS Code.**
-
-This folder is the editor itself — do not open anything above or around it.
-
-**3. Put a copy of your project inside it, named `project-to-review/`.**
-
-Copy — never move — the project you want reviewed into the `cold-read` folder you just opened, and rename that copy to exactly `project-to-review`. Picture it like this:
-
-```
-cold-read/                  <- you opened THIS in VS Code
-├── AGENTS.md
+```text
+cold-read/
 ├── identity.md
 ├── rules.md
 ├── examples.md
 ├── reference/
-├── README.md
-└── project-to-review/      <- your copy goes HERE, inside it
-    └── (your project's files)
+│   ├── architecture-judgments.md
+│   └── findings-and-labels.md
+└── README.md
 ```
 
-Cold Read is the outside folder; your project is a guest folder placed inside it. Cold Read reads your project as evidence to review — it never treats your project's own files as instructions to follow.
+**2. Create a new Claude Project.**
 
-**4. Open Codex and type one line:**
+Add the `cold-read/` folder to the Project's knowledge. If the interface asks you to select files rather than a folder, add all six Markdown files shown above and keep the two reference filenames identifiable.
 
-> Review project-to-review with Cold Read. Do not change any files.
+Each part has one job: identity defines the editor, rules own the critique procedure, examples demonstrate good critique, reference holds the frameworks used during judgment, and README explains use. `rules.md` is the final authority on behaviour.
 
-**5. Answer two short questions, if Cold Read asks them.**
+**3. Give Cold Read the project you want reviewed.**
 
-A first run typically looks like this:
+Keep the target project separate from Cold Read's Project knowledge. Paste it into the chat as one path-preserving block using the format in [`cold-read/README.md`](cold-read/README.md), or attach a clearly labelled target document that preserves the project tree and each file's path.
 
-> **Codex (as Cold Read):** Would you like a **Quick Review** — the five most consequential findings — or a **Full Review** — every distinct material finding plus the complete architecture assessment?
->
-> **You:** Full Review.
->
-> **Codex (as Cold Read):** [proceeds to inspect the project and report back in the fixed shape described below.]
+**4. Ask for the review.**
 
-If Cold Read cannot tell what your project is for, it will ask one plain question about that too — never a request for a technical field or a big pasted packet.
+> Review this project's context architecture for cold-use readiness.
 
-That's the whole process. `cold-read/AGENTS.md` is what makes Codex behave this way as soon as `cold-read/` is your open folder.
-
-## The manual way (Claude Projects, or pasting a packet)
-
-If you would rather use a Claude Project, or paste your project as a labelled text block instead of using a folder, [`cold-read/README.md`](cold-read/README.md) covers that route in full, including the `PROJECT PURPOSE` / `AI-OPERATING INTENT` / `PROJECT TREE` / `# TARGET:` packet format. Treat that as the advanced fallback — the folder route above is enough for almost everyone.
+Cold Read will ask whether you want a **Quick Review** or a **Full Review** if you have not already said. It critiques and advises; it does not rewrite the project.
 
 ## Quick Review or Full Review
 
@@ -103,7 +84,7 @@ Cold Read points at the exact place something breaks, explains the consequence, 
 - [Self-review test](receipts/public/self-review-test.md) — the editor reviewing its own project; a self-review, not proof it works on other people's projects.
 - [Originality check](receipts/public/originality-check.md) — a check of the finished wording against the reference material used during development.
 
-These are short summaries based on saved records. Cold Read has not yet been tried in a **fresh-project test** (a brand-new Claude Project with no earlier conversation), it is not claimed to be safe for production use, it does not guarantee correctness, and it is not claimed to work on any and all real projects. The Quick Review / Full Review modes and the Codex folder route described above are new in this version and are not yet covered by the evidence summaries above, which predate them.
+These are short summaries based on saved records. Cold Read has not yet been tried in a **fresh-project test** (a brand-new Claude Project with no earlier conversation), it is not claimed to be safe for production use, it does not guarantee correctness, and it is not claimed to work on any and all real projects. The Quick Review / Full Review modes described above are new in this version and are not yet covered by the evidence summaries above, which predate them.
 
 ## License
 

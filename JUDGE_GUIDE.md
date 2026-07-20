@@ -4,13 +4,14 @@ This is a self-contained test you can run in about a minute. It is something you
 
 ## Setup (about a minute)
 
-1. Create a new **Claude Project** (or use the [easy Codex/VS Code path](README.md) — either route runs the same rules).
-2. Add these files from [`cold-read/`](cold-read/) as the project's knowledge:
+1. Create a new **Claude Project**.
+2. Add the complete [`cold-read/`](cold-read/) editor folder to the Project's knowledge. Its five competition parts contain:
    - `identity.md`
    - `rules.md`
    - `examples.md`
    - `reference/architecture-judgments.md`
    - `reference/findings-and-labels.md`
+   - `README.md`
 3. Do **not** add the project you are testing to the knowledge — you paste it into the chat.
 
 ## The test project

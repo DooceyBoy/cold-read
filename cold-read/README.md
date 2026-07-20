@@ -2,25 +2,24 @@
 
 Cold Read is an editor for the context architecture of folder-based AI specialists. You give it a project you have built — a folder that turns a model into a coach, researcher, operator, or the like — and it tells you every material thing likely to break when someone other than you tries to use it, at whichever depth you ask for. It reviews **how the project is built**, not what it is about, and it **never rewrites or restructures your work** — it hands the decisions, and where earned the conceptual architecture recommendations, back to you.
 
-This folder *is* the editor. Drop it into a Claude Project, or open it directly in an editor like VS Code with Codex, and the model becomes Cold Read.
+This folder *is* the editor. It follows the competition's five-part methodology exactly: identity, rules, examples, reference, and README. Add it to a Claude Project and Claude becomes Cold Read.
 
 ---
 
-## Two ways to install it
-
-**If you are non-technical or this is your first time:** see the main [`README.md`](../README.md) at the top of this package for the easy Codex/VS Code path — download the folder, open it, drop a copy of your project inside as `project-to-review/`, and type one plain sentence. `AGENTS.md` in this folder makes that path work without any labelled fields.
-
-**If you use Claude Projects, or want the manual/advanced route:**
+## Install it in a Claude Project
 
 1. Create a new Claude Project.
-2. Add the five files in this `cold-read/` folder as the project's knowledge: `identity.md`, `rules.md`, `examples.md`, and both files in `reference/`. (This operating manual is optional as knowledge — it is for you, not the editor.)
-3. That is the whole install. The editor is now the project's context.
+2. Add this complete `cold-read/` folder to the Project's knowledge. If the interface asks for files individually, add `identity.md`, `rules.md`, `examples.md`, `README.md`, `reference/architecture-judgments.md`, and `reference/findings-and-labels.md`.
+3. Keep the filenames and the two reference paths identifiable. Each competition part has one job: `identity.md` owns who the editor is, `rules.md` owns how it critiques, `examples.md` demonstrates good critique, `reference/` holds the frameworks it consults, and `README.md` explains use.
+4. Claude should read `identity.md`, then `rules.md`, then `examples.md`, then the two reference files as `rules.md` directs. `rules.md` is canonical if another file appears to disagree.
 
-**Keep your own project out of the knowledge base.** The thing you want reviewed is not uploaded — you paste it into the chat (next section). That keeps your files and Cold Read's own files cleanly separate, even when they share names.
+That is the whole install.
+
+**Keep the target project out of Cold Read's Project knowledge.** Paste the thing you want reviewed into the chat as a path-preserving packet. This keeps the editor and the work being edited separate, even when they share filenames.
 
 ---
 
-## How to hand Cold Read a project (manual/advanced route)
+## How to hand Cold Read a project
 
 Paste the project you want reviewed into the chat as one block, in this shape:
 
@@ -89,5 +88,5 @@ If a Full Review's complete detail cannot fit in one reply, Cold Read says so pl
 ## Getting a useful review
 
 - State the **purpose** and the **AI-operating intent** where you can — without them, Cold Read cannot tell whether your project is meant to be AI-run at all, and may return `OUT OF SCOPE` or ask you a plain question to settle it.
-- Paste files **with their paths** (or let Cold Read read your live folder tree, if you are using the Codex/AGENTS.md route). Placement is evidence; a flattened dump of same-named files loses the very thing being judged.
+- Paste files **with their paths**. Placement is evidence; a flattened dump of same-named files loses the very thing being judged.
 - You do not have to paste everything. Leaving out ordinary implementation, content, or input files — a script, a data file, a notes doc — will not block a verdict: Cold Read judges your architecture, not those contents, and notes them as immaterial omissions. But if you omit files that carry the architecture itself — a routing file, or a context whose contents decide the question — you will get an honest `PARTIAL EVIDENCE` review of what is present rather than a guess about what is not. When in doubt, say what you left out and why.
