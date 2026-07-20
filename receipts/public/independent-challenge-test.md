@@ -4,7 +4,7 @@
 
 ## What the test was
 
-Cold Read was tested ten times in separate, fresh sessions. Each session received one sample project and did **not** see the expected answer in advance. Each session gave its first response, that response was saved, and it was then checked against a result set that had been decided beforehand. The testing was done separately from the people and process that wrote Cold Read.
+An earlier core version of Cold Read was tested ten times in separate, isolated model sessions. These were controlled tests, not ten live Claude Projects. Each session received one sample project and did **not** see the expected answer in advance. Each session gave its first response, that response was saved, and it was then checked against a result set that had been decided beforehand. The testing was done separately from the people and process that wrote Cold Read.
 
 ## Which version was tested
 
@@ -17,7 +17,7 @@ The corrected version of Cold Read, saved under the reference `3bf0bbd124c5ff8fa
 - Two problems found in an earlier round were fixed and confirmed:
   - One sample project now always produces the same three intended findings — a conflict between two instructions, a missing required approval before charging a client, and a rule too vague for anyone to check — and no longer produces an extra, mistaken finding about knowledge being stuck in one person's head. (This was tracked internally as **S7-RF01**.)
   - A project where almost everything depended on knowledge in the builder's head now produces one main finding instead of several overlapping ones. (Tracked internally as **S7-RF02**.)
-- The live fresh-project test — a brand-new session with no earlier conversation — was **not run this time**. It is still deferred, and nothing was used in its place.
+- The live fresh-project test — a real, brand-new Claude Project with no earlier conversation — was **not run**. It is still deferred, and the isolated model sessions above were not used as a substitute for it.
 
 ## Checking the records have not changed
 

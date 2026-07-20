@@ -10,7 +10,7 @@ New to this? Start with the **[plain-English guide](PLAIN_ENGLISH_GUIDE.md)** �
 
 ## What's in the public package
 
-The editor you install is the [`cold-read/`](cold-read/) folder. It contains exactly the competition's five required parts: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The **public package** — the exact list is in the [public file list](PUBLIC_PACKAGE_MANIFEST.md) — is that editor plus this repository's judge guide, plain-English guide, license, one sample project, and short public test summaries, and nothing else (15 files in total). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
+The editor you install is the [`cold-read/`](cold-read/) folder. It contains exactly the competition's five required parts: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The **public package** is that six-file editor plus this main README, the public file list, judge guide, plain-English guide, license, one sample project, and three short public evidence summaries — exactly 15 files. The exact paths are in [`PUBLIC_PACKAGE_MANIFEST.md`](PUBLIC_PACKAGE_MANIFEST.md). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
 
 ## How to run it in Claude Projects
 
@@ -41,7 +41,16 @@ Each part has one job: identity defines the editor, rules own the critique proce
 
 **3. Give Cold Read the project you want reviewed.**
 
-Keep the target project separate from Cold Read's Project knowledge. Paste it into the chat as one path-preserving block using the format in [`cold-read/README.md`](cold-read/README.md), or attach a clearly labelled target document that preserves the project tree and each file's path.
+Make a copy of the project you want reviewed so the original stays safe, but **keep its normal folder name** — do not rename it. Keep that copy separate from the `cold-read/` editor folder and from Cold Read's Project knowledge. For example:
+
+```text
+your-normal-project-name/
+├── CLAUDE.md
+├── context/
+└── reference/
+```
+
+Attach or paste that project into the chat while preserving its normal top-level folder name, tree, and file paths. [`cold-read/README.md`](cold-read/README.md) shows the path-preserving packet format when you need to paste the files as one block.
 
 **4. Ask for the review.**
 
@@ -80,11 +89,11 @@ Cold Read points at the exact place something breaks, explains the consequence, 
 
 ## Evidence (public summaries)
 
-- [Independent challenge test](receipts/public/independent-challenge-test.md) — a summary of an independent test of this build.
-- [Self-review test](receipts/public/self-review-test.md) — the editor reviewing its own project; a self-review, not proof it works on other people's projects.
-- [Originality check](receipts/public/originality-check.md) — a check of the finished wording against the reference material used during development.
+- [Independent challenge test](receipts/public/independent-challenge-test.md) — a summary of independent tests of an earlier core version.
+- [Self-review test](receipts/public/self-review-test.md) — an earlier version of the editor reviewing its own project; a self-review, not proof it works on other people's projects.
+- [Originality check](receipts/public/originality-check.md) — a wording check performed on the earlier version recorded in that summary.
 
-These are short summaries based on saved records. Cold Read has not yet been tried in a **fresh-project test** (a brand-new Claude Project with no earlier conversation), it is not claimed to be safe for production use, it does not guarantee correctness, and it is not claimed to work on any and all real projects. The Quick Review / Full Review modes described above are new in this version and are not yet covered by the evidence summaries above, which predate them.
+These summaries describe earlier checkpoints, not the complete current v0.1.2 package. They do not cover the current Claude Project onboarding, Quick Review / Full Review modes, or the final v0.1.2 wording. Cold Read has not yet been tried in a **live fresh-project test** (a brand-new Claude Project with no earlier conversation), it is not claimed to be safe for production use, it does not guarantee correctness, and it is not claimed to work on every real project.
 
 ## License
 

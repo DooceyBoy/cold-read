@@ -21,18 +21,22 @@ That is the whole install.
 
 ## How to hand Cold Read a project
 
-Paste the project you want reviewed into the chat as one block, in this shape:
+Make a copy so your original project stays safe, but keep the copy's normal folder name. Do **not** rename it, and do not place it inside the `cold-read/` editor folder. Attach it to the chat with its tree and paths intact, or paste it as one path-preserving block. For a project whose normal folder name is `your-normal-project-name`, use this shape:
 
 ```
 PROJECT PURPOSE: <one plain sentence — what the project is for>
 AI-OPERATING INTENT: <how AI is meant to run this work>
-PROJECT TREE: <the folder tree, with paths>
+PROJECT TREE:
+your-normal-project-name/
+├── CLAUDE.md
+└── context/
+    └── instructions.md
 
-# TARGET: path/to/first-file.md
-<the file's contents>
+# TARGET: your-normal-project-name/CLAUDE.md
+<that file's contents>
 
-# TARGET: path/to/second-file.md
-<the file's contents>
+# TARGET: your-normal-project-name/context/instructions.md
+<that file's contents>
 ```
 
 The `# TARGET:` header before each file matters — the path is part of what Cold Read judges (a rule in your root means something different from the same rule in a sub-folder), and the headers keep files distinct even if two of them share a name. Include as much of the project as is relevant; you do not have to paste everything.

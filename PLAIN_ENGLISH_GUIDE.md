@@ -86,7 +86,7 @@ Lists the questions Cold Read uses to judge whether a project's setup makes sens
 Explains the names Cold Read gives to different types of problems, and how importance is ranked.
 
 ### cold-read/README.md
-Explains how to install Cold Read and give it a project to review, including the manual/advanced route.
+Explains how to install Cold Read and give it a project to review.
 
 **The rest of the public files:**
 
@@ -145,7 +145,7 @@ cold-read/
 ```
 
 4. Create a new Claude Project and add the complete `cold-read/` folder to its knowledge. If Claude asks for files individually, add all six Markdown files shown above.
-5. Keep the target project separate from the editor. Paste the target into the chat as one document that preserves its tree, paths, and file contents; `cold-read/README.md` shows the exact `# TARGET:` format.
+5. Make a copy of the target project so the original stays safe, but keep its normal folder name — do not rename it. Keep it separate from the editor, then attach or paste it into the chat with its top-level folder name, tree, paths, and file contents preserved. `cold-read/README.md` shows the exact `# TARGET:` format.
 6. Type: `Review this project's context architecture for cold-use readiness.`
 7. Choose Quick Review or Full Review when Cold Read asks.
 
@@ -182,10 +182,10 @@ The project works only because important knowledge is still in the builder's hea
 Cold Read reviewed its own project. This checks honesty and restraint, but it is not independent proof.
 
 ### Independent challenge test
-Cold Read was given difficult sample projects in fresh sessions. Its first answers were saved and checked against expected results.
+An earlier core version of Cold Read was given difficult sample projects in ten isolated test sessions. These were controlled model tests, not ten live Claude Projects. Its first answers were saved and checked against expected results.
 
 ### Fresh-project test
-A brand-new Claude Project with no earlier conversation and no hidden background. This test is still deferred and must not be presented as completed.
+A real, brand-new Claude Project with no earlier conversation and no hidden background. This live setup test is still deferred and must not be presented as completed.
 
 ### Sample project
 A project made specifically for testing, with known problems built in.

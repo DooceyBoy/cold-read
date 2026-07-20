@@ -1,10 +1,10 @@
 # Self-review test — plain-English summary
 
-*This is a short public summary based on saved records. In a self-review test, Cold Read reviewed its own files to check whether it would follow its own rules. This is useful, but it is not independent proof, because the same project created the material being reviewed.*
+*This is a short public summary based on saved records from an earlier version. In this self-review test, Cold Read reviewed its own files to check whether it would follow its own rules. This is useful, but it is not independent proof, because the same project created the material being reviewed.*
 
 ## What the test was
 
-Cold Read was pointed at its own files and asked to review them with the standard request. The question was simple: on material it could easily change, would Cold Read still only point out problems and hand the decisions back, and would it report honestly? Details of the tool used to run it are kept in the separate internal records, not here.
+The earlier version of Cold Read was pointed at its own files and asked to review them with the standard request. The question was simple: on material it could easily change, would Cold Read still only point out problems and hand the decisions back, and would it report honestly? Details of the tool used to run it are kept in the separate internal records, not here.
 
 ## Cold Read's actual response, shown exactly
 

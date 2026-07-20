@@ -1,6 +1,6 @@
 # Public file list
 
-This file is the exact list of files allowed in the public release of Cold Read. (An "allowlist" is just that: the exact list of files allowed in the public release.) A clean release is put together by taking exactly the files listed under **Allowed** and nothing else. The release itself is **not** built or published here — this file only says what a clean release may contain.
+This file records the exact 15-file public package for Cold Read v0.1.2. Every allowed path is listed explicitly; anything not listed stays private.
 
 ## Allowed (the whole public release)
 
@@ -10,14 +10,19 @@ JUDGE_GUIDE.md
 PLAIN_ENGLISH_GUIDE.md
 LICENSE
 PUBLIC_PACKAGE_MANIFEST.md
-cold-read/**
+cold-read/README.md
+cold-read/examples.md
+cold-read/identity.md
+cold-read/rules.md
+cold-read/reference/architecture-judgments.md
+cold-read/reference/findings-and-labels.md
 test-fixtures/nested-specialist.md
 receipts/public/independent-challenge-test.md
 receipts/public/self-review-test.md
 receipts/public/originality-check.md
 ```
 
-`cold-read/**` is the editor itself and follows the competition's five-part methodology exactly: `identity.md`, `rules.md`, `examples.md`, the two Markdown files in `reference/`, and `README.md`. With that folder expanded, the public package is **15 files** in total.
+The six `cold-read/` paths are the editor itself and follow the competition's five-part methodology exactly: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The complete public package is **15 files** in total.
 
 ## Not in the public release (kept privately, never deleted)
 
@@ -31,4 +36,4 @@ Everything not listed under **Allowed** is left out. The rule is simply: include
 - the separate shared working folder used during development;
 - any raw session records, internal notes, and file locations from the machine used to build it.
 
-These files are **not** deleted — they are kept as private records. Building or publishing the release is a separate, later step and is not done here.
+These files are **not** deleted — they remain private records outside the public repository and release.
