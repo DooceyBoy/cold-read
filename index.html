@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cold Read reviews the context architecture behind AI projects. It finds missing responsibilities, contradictions, vague rules, and handoff gaps—without rewriting your work.">
+  <meta name="theme-color" content="#0d2625">
+  <meta property="og:title" content="Cold Read — The editor for context architecture">
+  <meta property="og:description" content="Find what your AI project forgot to explain, before a stranger or fresh session finds out the hard way.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dooceyboy.github.io/cold-read/">
+  <title>Cold Read — The editor for context architecture</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2625'/%3E%3Cpath d='M18 17h28v7H25v8h18v7H25v8h21v7H18z' fill='%23a9e8d6'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #17201e;
+      --ink-soft: #46514e;
+      --paper: #f5f0e6;
+      --paper-deep: #e8e0d3;
+      --forest: #0d2625;
+      --forest-2: #153734;
+      --mint: #a9e8d6;
+      --mint-strong: #58c9ae;
+      --coral: #e7654f;
+      --line: rgba(23, 32, 30, .18);
+      --line-dark: rgba(245, 240, 230, .18);
+      --shadow: 0 28px 70px rgba(13, 38, 37, .14);
+      --display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --body: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 32, 30, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 100% 28px;
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    ::selection { background: var(--mint); color: var(--forest); }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-180%);
+      padding: 10px 14px;
+      color: var(--forest);
+      background: var(--mint);
+      border-radius: 4px;
+      font-weight: 800;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .shell { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(245, 240, 230, .9);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      color: var(--mint);
+      background: var(--forest);
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 750;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.button,
+    .nav-links a.button:hover { color: #fffdf7; }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid var(--forest);
+      border-radius: 5px;
+      text-decoration: none;
+      background: var(--forest);
+      color: #fffdf7;
+      font-weight: 850;
+      letter-spacing: -.01em;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(13, 38, 37, .18); }
+    .button.secondary { color: var(--forest); background: transparent; }
+    .button.secondary:hover { background: rgba(13, 38, 37, .06); box-shadow: none; }
+    .button.light { color: var(--forest); background: var(--mint); border-color: var(--mint); }
+    .button:focus-visible, .tab:focus-visible, .nav-links a:focus-visible, .brand:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 3px;
+    }
+
+    .hero {
+      min-height: 780px;
+      display: grid;
+      align-items: center;
+      padding: 92px 0 74px;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
+      align-items: center;
+      gap: clamp(48px, 8vw, 108px);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--forest);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--coral); }
+    h1, h2, h3, p { text-wrap: pretty; }
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(58px, 7.5vw, 104px);
+      font-weight: 600;
+      line-height: .92;
+      letter-spacing: -.065em;
+    }
+    h1 em { color: var(--forest); font-weight: 400; }
+    .hero-copy > p {
+      max-width: 650px;
+      margin: 30px 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.55;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .hero-note { margin-top: 16px; color: #68716f; font-size: 13px; }
+
+    .memo-wrap { position: relative; isolation: isolate; }
+    .memo-wrap::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 360px;
+      height: 360px;
+      right: -80px;
+      top: -100px;
+      border-radius: 50%;
+      background: var(--mint);
+      opacity: .58;
+      filter: blur(2px);
+    }
+    .memo {
+      position: relative;
+      transform: rotate(1.8deg);
+      padding: 30px 30px 27px;
+      background: #fffdf7;
+      border: 1px solid rgba(23, 32, 30, .26);
+      box-shadow: var(--shadow);
+    }
+    .memo::before {
+      content: "COLD READ";
+      position: absolute;
+      top: 24px;
+      right: 26px;
+      padding: 5px 9px;
+      border: 2px solid var(--coral);
+      color: var(--coral);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      transform: rotate(-5deg);
+    }
+    .memo-kicker { margin: 0 0 40px; color: #727a77; font-family: var(--mono); font-size: 11px; text-transform: uppercase; }
+    .memo h2 { max-width: 330px; margin: 0; font-family: var(--display); font-size: 35px; line-height: 1.05; letter-spacing: -.035em; }
+    .memo-rule { height: 1px; margin: 24px 0; background: var(--line); }
+    .memo-list { display: grid; gap: 17px; }
+    .memo-item { display: grid; grid-template-columns: 27px 1fr; gap: 12px; }
+    .memo-num { color: var(--coral); font-family: var(--mono); font-weight: 900; }
+    .memo-item strong { display: block; font-size: 14px; }
+    .memo-item span { display: block; margin-top: 2px; color: #59615f; font-size: 13px; line-height: 1.45; }
+    .memo-footer { display: flex; justify-content: space-between; gap: 10px; margin-top: 26px; color: #747c79; font-family: var(--mono); font-size: 10px; text-transform: uppercase; }
+
+    .statement {
+      padding: 94px 0;
+      color: #fffdf7;
+      background: var(--forest);
+    }
+    .statement-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(40px, 8vw, 110px); }
+    .section-index { color: var(--mint); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .statement blockquote { margin: 0; font-family: var(--display); font-size: clamp(38px, 5vw, 68px); line-height: 1.05; letter-spacing: -.04em; }
+    .statement blockquote span { color: var(--mint); }
+    .statement p { max-width: 690px; margin: 30px 0 0; color: rgba(255, 253, 247, .72); font-size: 18px; }
+
+    .section { padding: 110px 0; }
+    .section-head { display: grid; grid-template-columns: .72fr 1.28fr; gap: 50px; margin-bottom: 62px; align-items: start; }
+    .section-head h2 { max-width: 740px; margin: 0; font-family: var(--display); font-size: clamp(46px, 5.7vw, 74px); font-weight: 500; line-height: 1; letter-spacing: -.045em; }
+    .section-head p { max-width: 600px; margin: 16px 0 0; color: var(--ink-soft); font-size: 18px; }
+
+    .checks { border-top: 1px solid var(--line); }
+    .check-row {
+      display: grid;
+      grid-template-columns: 70px minmax(190px, .7fr) 1.3fr;
+      gap: 28px;
+      padding: 29px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .check-row .number { color: var(--coral); font-family: var(--mono); font-size: 12px; font-weight: 900; }
+    .check-row h3 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+    .check-row p { margin: 0; color: var(--ink-soft); }
+
+    .demo-section { padding: 110px 0; color: #fffdf7; background: #111917; }
+    .demo-section .section-head p { color: rgba(255,255,255,.66); }
+    .demo-shell { overflow: hidden; border: 1px solid var(--line-dark); background: #0a100f; box-shadow: 0 34px 90px rgba(0,0,0,.3); }
+    .demo-toolbar {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 8px 12px 8px 20px;
+      border-bottom: 1px solid var(--line-dark);
+      background: #151e1c;
+    }
+    .file-label { color: #aab5b1; font-family: var(--mono); font-size: 12px; }
+    .tabs { display: flex; gap: 4px; padding: 3px; background: #0a100f; border-radius: 5px; }
+    .tab {
+      min-height: 40px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 3px;
+      color: #aab5b1;
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .tab[aria-selected="true"] { color: var(--forest); background: var(--mint); }
+    .demo-grid { display: grid; grid-template-columns: .88fr 1.12fr; }
+    .code-panel { padding: 30px 26px 34px; border-right: 1px solid var(--line-dark); background: #0d1413; }
+    .panel-label { margin: 0 0 18px; color: #82908b; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .code {
+      margin: 0;
+      color: #d9e1de;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.85;
+      white-space: pre-wrap;
+    }
+    .line { display: block; padding: 0 8px; margin: 0 -8px; }
+    .line.bad { color: #ffb3a7; background: rgba(231, 101, 79, .12); }
+    .line.good { color: #b7eadc; }
+    .results-panel { padding: 30px 30px 34px; }
+    .result-head { display: flex; justify-content: space-between; gap: 18px; align-items: start; padding-bottom: 20px; border-bottom: 1px solid var(--line-dark); }
+    .result-head h3 { margin: 0; font-family: var(--display); font-size: 31px; font-weight: 500; letter-spacing: -.02em; }
+    .verdict { padding: 6px 9px; border: 1px solid rgba(231, 101, 79, .6); color: #ffb3a7; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .finding-list { display: grid; }
+    .finding { display: grid; grid-template-columns: 74px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line-dark); }
+    .severity { padding-top: 2px; color: var(--coral); font-family: var(--mono); font-size: 10px; font-weight: 900; text-transform: uppercase; }
+    .finding h4 { margin: 0; font-size: 15px; }
+    .finding p { margin: 5px 0 0; color: #aab5b1; font-size: 13px; line-height: 1.55; }
+    .full-only { display: none; }
+    .demo-shell[data-mode="full"] .full-only { display: block; }
+    .architecture-read { margin-top: 22px; padding: 18px; color: #cbd6d2; background: var(--forest-2); border: 1px solid rgba(169, 232, 214, .2); font-size: 13px; }
+    .architecture-read strong { color: var(--mint); }
+    .demo-caption { margin: 14px 0 0; color: #89938f; font-size: 12px; text-align: right; }
+
+    .method { background: var(--paper-deep); }
+    .method-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(50px, 8vw, 120px); align-items: start; }
+    .method-copy { position: sticky; top: 110px; }
+    .method-copy h2 { margin: 10px 0 22px; font-family: var(--display); font-size: clamp(48px, 5.4vw, 74px); font-weight: 500; line-height: 1; letter-spacing: -.045em; }
+    .method-copy p { color: var(--ink-soft); font-size: 18px; }
+    .tree { padding: 4px 0; border-top: 1px solid var(--line); }
+    .tree-row {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .tree-file { font-family: var(--mono); font-size: 14px; font-weight: 900; }
+    .tree-row p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+    .tree-indent { padding-left: 28px; }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .step { min-height: 290px; padding: 28px; border-right: 1px solid var(--line); }
+    .step:last-child { border-right: 0; }
+    .step-num { display: block; margin-bottom: 70px; color: var(--coral); font-family: var(--mono); font-size: 12px; font-weight: 900; }
+    .step h3 { margin: 0; font-family: var(--display); font-size: 29px; font-weight: 500; line-height: 1.05; }
+    .step p { margin: 15px 0 0; color: var(--ink-soft); font-size: 14px; }
+
+    .boundary { padding: 110px 0; color: #fffdf7; background: var(--forest); }
+    .boundary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); }
+    .boundary-panel { min-height: 350px; padding: clamp(28px, 5vw, 60px); background: var(--forest); }
+    .boundary-panel.rewriter { background: #16211f; }
+    .boundary-panel small { color: var(--mint); font-family: var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .boundary-panel h2 { max-width: 460px; margin: 24px 0 20px; font-family: var(--display); font-size: clamp(38px, 4.7vw, 60px); font-weight: 500; line-height: 1; letter-spacing: -.035em; }
+    .boundary-panel p { max-width: 480px; color: rgba(255,255,255,.67); }
+    .strike { text-decoration: line-through; text-decoration-color: var(--coral); text-decoration-thickness: 3px; }
+
+    .closing { padding: 120px 0 54px; text-align: center; }
+    .closing h2 { max-width: 940px; margin: 0 auto; font-family: var(--display); font-size: clamp(54px, 7vw, 92px); font-weight: 500; line-height: .95; letter-spacing: -.055em; }
+    .closing p { max-width: 650px; margin: 28px auto 0; color: var(--ink-soft); font-size: 18px; }
+    .closing .hero-actions { justify-content: center; }
+    .evidence-note { max-width: 740px; margin: 76px auto 0; padding-top: 24px; border-top: 1px solid var(--line); color: #6c7471; font-size: 12px; }
+
+    footer { padding: 0 0 35px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 28px; padding-top: 22px; border-top: 1px solid var(--line); color: #66706d; font-size: 12px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a:hover { color: var(--ink); }
+
+    .reveal { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.button) { display: none; }
+      .hero { min-height: auto; padding-top: 72px; }
+      .hero-grid, .section-head, .statement-grid, .method-layout { grid-template-columns: 1fr; }
+      .hero-grid { gap: 76px; }
+      .memo-wrap { max-width: 570px; }
+      .statement-grid, .section-head { gap: 26px; }
+      .check-row { grid-template-columns: 48px 1fr; }
+      .check-row p { grid-column: 2; }
+      .demo-grid { grid-template-columns: 1fr; }
+      .code-panel { border-right: 0; border-bottom: 1px solid var(--line-dark); }
+      .method-copy { position: static; }
+      .steps { grid-template-columns: 1fr; }
+      .step { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .step:last-child { border-bottom: 0; }
+      .step-num { margin-bottom: 38px; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(calc(100% - 28px), var(--max)); }
+      .nav { min-height: 60px; }
+      .brand-mark { width: 28px; height: 28px; }
+      .nav .button { min-height: 42px; padding: 0 13px; font-size: 13px; }
+      .hero { padding: 58px 0 64px; }
+      h1 { font-size: clamp(53px, 17vw, 76px); }
+      .hero-copy > p { font-size: 18px; }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .memo { padding: 25px 21px; }
+      .memo::before { top: 19px; right: 19px; }
+      .memo-wrap::before { width: 260px; height: 260px; right: -60px; }
+      .statement, .section, .demo-section, .boundary { padding: 78px 0; }
+      .section-head { margin-bottom: 42px; }
+      .check-row { grid-template-columns: 36px 1fr; gap: 15px; }
+      .demo-toolbar { align-items: stretch; flex-direction: column; padding: 14px; }
+      .tabs { width: 100%; }
+      .tab { flex: 1; }
+      .code-panel, .results-panel { padding: 22px 16px 25px; }
+      .result-head { align-items: start; flex-direction: column-reverse; }
+      .finding { grid-template-columns: 60px 1fr; }
+      .tree-row { grid-template-columns: 1fr; gap: 7px; }
+      .boundary-grid { grid-template-columns: 1fr; }
+      .boundary-panel { min-height: 0; }
+      .closing { padding-top: 86px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Cold Read home">
+        <span class="brand-mark" aria-hidden="true">CR</span>
+        <span>Cold Read</span>
+      </a>
+      <div class="nav-links">
+        <a href="#checks">What it checks</a>
+        <a href="#demo">Demonstration</a>
+        <a href="#method">Five-part method</a>
+        <a class="button" href="https://github.com/DooceyBoy/cold-read" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">The editor for context architecture</p>
+          <h1>See what your AI project <em>forgot to explain.</em></h1>
+          <p>Cold Read reviews the files that tell an AI how to work—like <code>CLAUDE.md</code>, <code>CONTEXT.md</code>, examples, and reference material. It finds what is missing, contradictory, vague, or stuck in your head, then hands the decisions back to you.</p>
+          <div class="hero-actions">
+            <a class="button" href="#demo">See a critique</a>
+            <a class="button secondary" href="https://github.com/DooceyBoy/cold-read/releases/download/cold-read-v0.1.2/cold-read-public-v0.1.2.zip">Download v0.1.2 <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero-note">Open source · MIT licensed · Created by Jude Doocey</p>
+        </div>
+
+        <div class="memo-wrap reveal" aria-label="Example Cold Read review memo">
+          <article class="memo">
+            <p class="memo-kicker">Review memo · Full Review</p>
+            <h2>Your system works because you remember what the files do not.</h2>
+            <div class="memo-rule"></div>
+            <div class="memo-list">
+              <div class="memo-item">
+                <span class="memo-num">01</span>
+                <div><strong>Missing approval</strong><span>A client charge can happen without a person authorising it.</span></div>
+              </div>
+              <div class="memo-item">
+                <span class="memo-num">02</span>
+                <div><strong>Conflicting rules</strong><span>One file requires sign-off; another sends automatically.</span></div>
+              </div>
+              <div class="memo-item">
+                <span class="memo-num">03</span>
+                <div><strong>Vague completion test</strong><span>“Solid enough” gives no one a checkable finish line.</span></div>
+              </div>
+            </div>
+            <div class="memo-footer"><span>Readiness</span><strong>Revision required</strong></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div class="shell statement-grid reveal">
+        <p class="section-index">The difference</p>
+        <div>
+          <blockquote>Cold Read is an editor. <span>Not a rewriter.</span></blockquote>
+          <p>It points at the exact weak line, explains what happens because of it, and tells you which decision still needs to be made. It will not replace your file, write your prompt, or quietly become the author of your work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="checks">
+      <div class="shell">
+        <header class="section-head reveal">
+          <p class="section-index">What it checks</p>
+          <div>
+            <h2>Problems that only appear when someone else tries to use it.</h2>
+            <p>Cold Read judges each project against what that project is actually trying to do. It does not demand more files, agents, or process unless the work genuinely earns them.</p>
+          </div>
+        </header>
+
+        <div class="checks reveal">
+          <article class="check-row">
+            <span class="number">01</span>
+            <h3>Missing responsibility</h3>
+            <p>An important job, approval, or connecting step exists in the workflow—but nothing owns it.</p>
+          </article>
+          <article class="check-row">
+            <span class="number">02</span>
+            <h3>Contradictory instructions</h3>
+            <p>Two files tell the AI to behave differently at the same moment, leaving the outcome to chance.</p>
+          </article>
+          <article class="check-row">
+            <span class="number">03</span>
+            <h3>Unobservable rules</h3>
+            <p>Words like “good,” “appropriate,” or “solid enough” sound useful but give no one a finish line they can check.</p>
+          </article>
+          <article class="check-row">
+            <span class="number">04</span>
+            <h3>Knowledge stuck in your head</h3>
+            <p>The project works for its builder, but a stranger or fresh session would not know how to continue.</p>
+          </article>
+          <article class="check-row">
+            <span class="number">05</span>
+            <h3>Unnecessary complexity</h3>
+            <p>Extra agents, duplicated rules, or reference files add cost without improving the work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+      <div class="shell">
+        <header class="section-head reveal">
+          <p class="section-index">Small demonstration</p>
+          <div>
+            <h2>One instruction file. Three decisions hiding inside it.</h2>
+            <p>Switch review depth to see how the response changes. Both modes inspect the complete relevant project; Full Review adds the complete architecture assessment.</p>
+          </div>
+        </header>
+
+        <div class="demo-shell reveal" data-mode="quick" id="demo-shell">
+          <div class="demo-toolbar">
+            <span class="file-label">client-onboarding/CLAUDE.md</span>
+            <div class="tabs" role="tablist" aria-label="Review depth">
+              <button class="tab" id="quick-tab" type="button" role="tab" aria-selected="true" aria-controls="demo-results" data-mode="quick">Quick Review</button>
+              <button class="tab" id="full-tab" type="button" role="tab" aria-selected="false" aria-controls="demo-results" data-mode="full">Full Review</button>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="code-panel" aria-label="Example source file">
+              <p class="panel-label">Target evidence</p>
+              <pre class="code"><code><span class="line good"># Client onboarding assistant</span>
+<span class="line">Research the client's market.</span>
+<span class="line bad">Move on once the research is solid enough.</span>
+<span class="line">Prepare a summary for the client.</span>
+<span class="line bad">Get the client's sign-off before sending.</span>
+<span class="line bad">Send the summary automatically when ready.</span>
+<span class="line bad">Charge the card on file after delivery.</span></code></pre>
+            </div>
+            <div class="results-panel" id="demo-results" role="tabpanel" aria-labelledby="quick-tab">
+              <div class="result-head">
+                <h3 id="mode-title">Quick Review · 3 findings</h3>
+                <span class="verdict">Revision required</span>
+              </div>
+              <div class="finding-list">
+                <article class="finding">
+                  <span class="severity">Critical</span>
+                  <div><h4>Missing responsibility</h4><p>The project can charge a client's card, but no rule requires a person's approval before money moves.</p></div>
+                </article>
+                <article class="finding">
+                  <span class="severity">High</span>
+                  <div><h4>Contradiction</h4><p>“Get sign-off before sending” and “send automatically” cannot both govern the same delivery.</p></div>
+                </article>
+                <article class="finding">
+                  <span class="severity">Medium</span>
+                  <div><h4>Unobservable rule</h4><p>“Solid enough” provides no evidence a fresh session can use to decide when research is complete.</p></div>
+                </article>
+              </div>
+              <div class="architecture-read full-only">
+                <strong>Architecture read:</strong> research and delivery are valid separate responsibilities, but the handoff has no checkable completion signal and the financial action has no human gate. Fix those ownership decisions; do not add another agent.
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="demo-caption">Illustrative demonstration—not a live AI response.</p>
+      </div>
+    </section>
+
+    <section class="section method" id="method">
+      <div class="shell method-layout">
+        <div class="method-copy reveal">
+          <p class="section-index">Folders as architecture</p>
+          <h2>Five parts. One job each.</h2>
+          <p>The editor follows the competition methodology exactly. No adapter file, hidden setup, or extra agent layer.</p>
+        </div>
+        <div class="tree reveal" aria-label="Cold Read folder structure">
+          <div class="tree-row"><span class="tree-file">identity.md</span><p>Who Cold Read is, what it reviews, and where it stops.</p></div>
+          <div class="tree-row"><span class="tree-file">rules.md</span><p>The canonical critique procedure and output contract.</p></div>
+          <div class="tree-row"><span class="tree-file">examples.md</span><p>Worked demonstrations of specific, bounded critique.</p></div>
+          <div class="tree-row"><span class="tree-file">reference/</span><p>Architecture judgments, finding labels, and severity guidance.</p></div>
+          <div class="tree-row"><span class="tree-file tree-indent">README.md</span><p>How a stranger installs the editor and hands it a project.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="use">
+      <div class="shell">
+        <header class="section-head reveal">
+          <p class="section-index">Use it</p>
+          <div><h2>From download to useful critique in three steps.</h2></div>
+        </header>
+        <div class="steps reveal">
+          <article class="step">
+            <span class="step-num">Step 01</span>
+            <h3>Add Cold Read to a Claude Project.</h3>
+            <p>Upload the complete six-file editor folder as Project knowledge.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">Step 02</span>
+            <h3>Copy your project. Keep its normal name.</h3>
+            <p>Do not rename it or place it inside Cold Read. Attach or paste it with its folder tree and paths intact.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">Step 03</span>
+            <h3>Ask for a Quick or Full Review.</h3>
+            <p>Cold Read maps the complete relevant project first, then reports at the depth you choose.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="boundary">
+      <div class="shell boundary-grid reveal">
+        <article class="boundary-panel">
+          <small>Cold Read does</small>
+          <h2>“This line leaves approval unowned.”</h2>
+          <p>It identifies the exact place, consequence, missing decision, and—when earned—the conceptual shape a revision needs.</p>
+        </article>
+        <article class="boundary-panel rewriter">
+          <small>Cold Read does not</small>
+          <h2 class="strike">“Here is your corrected file.”</h2>
+          <p>No replacement wording. No ready-to-paste prompt. No finished folder structure. The builder keeps the pen.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="shell reveal">
+        <h2>Give your project one cold read before someone else does.</h2>
+        <p>Download the editor, add it to a Claude Project, and see whether your context can travel without you.</p>
+        <div class="hero-actions">
+          <a class="button" href="https://github.com/DooceyBoy/cold-read/releases/download/cold-read-v0.1.2/cold-read-public-v0.1.2.zip">Download Cold Read</a>
+          <a class="button secondary" href="https://github.com/DooceyBoy/cold-read" target="_blank" rel="noreferrer">Read the GitHub guide <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="evidence-note">Cold Read v0.1.2 is open source under the MIT License. Public evidence summaries describe earlier checkpoints; a live fresh-project test in a brand-new Claude Project remains deferred. No production-safety or universal-correctness claim is made.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span>© 2026 Jude Doocey · First competition entry, shared with the community.</span>
+      <div class="footer-links">
+        <a href="https://github.com/DooceyBoy/cold-read">GitHub</a>
+        <a href="https://github.com/DooceyBoy/cold-read/releases/tag/cold-read-v0.1.2">Release v0.1.2</a>
+        <a href="https://github.com/DooceyBoy/cold-read/blob/main/LICENSE">MIT License</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const shell = document.getElementById('demo-shell');
+      const result = document.getElementById('demo-results');
+      const title = document.getElementById('mode-title');
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+
+      function setMode(mode) {
+        shell.dataset.mode = mode;
+        tabs.forEach((tab) => {
+          const active = tab.dataset.mode === mode;
+          tab.setAttribute('aria-selected', String(active));
+          tab.setAttribute('tabindex', active ? '0' : '-1');
+        });
+        result.setAttribute('aria-labelledby', mode + '-tab');
+        title.textContent = mode === 'full' ? 'Full Review · 3 findings + architecture read' : 'Quick Review · 3 findings';
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => setMode(tab.dataset.mode));
+        tab.addEventListener('keydown', (event) => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          const direction = event.key === 'ArrowRight' ? 1 : -1;
+          const next = tabs[(index + direction + tabs.length) % tabs.length];
+          next.focus();
+          setMode(next.dataset.mode);
+        });
+      });
+
+    }());
+  </script>
+</body>
+</html>
