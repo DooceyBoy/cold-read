@@ -12,6 +12,20 @@ New to this? Start with the **[plain-English guide](PLAIN_ENGLISH_GUIDE.md)** â€
 
 The editor you install is the [`cold-read/`](cold-read/) folder. It contains exactly the competition's five required parts: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The **public package** is that six-file editor plus this main README, the public file list, judge guide, plain-English guide, license, one sample project, and three short public evidence summaries â€” exactly 15 files. The exact paths are in [`PUBLIC_PACKAGE_MANIFEST.md`](PUBLIC_PACKAGE_MANIFEST.md). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
 
+## Fastest route: Claude Code (no download)
+
+Open the AI project you want reviewed in Claude Code and paste:
+
+```text
+The open folder is the AI project I want reviewed.
+
+Clone Cold Read from https://github.com/DooceyBoy/cold-read into a temporary folder outside my project. Use all six Markdown files inside cold-read/ as the review instructions, with rules.md as final authority.
+
+Do not copy anything into, edit, or rewrite my project. Ask whether I want a Quick Review or Full Review.
+```
+
+Approve GitHub access if asked, then choose **Quick Review** or **Full Review**. This loads Cold Read for the current session; it does not install a permanent command.
+
 ## How to run it in Claude Projects
 
 This is the competition's intended route: put the Cold Read editor folder into a Claude Project, then give that Project something to critique.
