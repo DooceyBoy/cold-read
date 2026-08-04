@@ -10,7 +10,7 @@ New to this? Start with the **[plain-English guide](PLAIN_ENGLISH_GUIDE.md)** �
 
 ## What's in the public package
 
-The editor you install is the [`cold-read/`](cold-read/) folder. It contains exactly the competition's five required parts: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The **public package** is that six-file editor plus this main README, the public file list, judge guide, plain-English guide, license, one sample project, and three short public evidence summaries — exactly 15 files. The exact paths are in [`PUBLIC_PACKAGE_MANIFEST.md`](PUBLIC_PACKAGE_MANIFEST.md). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
+The editor you install is the [`cold-read/`](cold-read/) folder. It contains exactly the competition's five required parts: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The **public package** is that seven-file editor plus this main README, the public file list, judge guide, plain-English guide, license, one sample project, and three short public evidence summaries — exactly 16 files. The exact paths are in [`PUBLIC_PACKAGE_MANIFEST.md`](PUBLIC_PACKAGE_MANIFEST.md). For the full manual see [`cold-read/README.md`](cold-read/README.md); for a one-minute try-it see [`JUDGE_GUIDE.md`](JUDGE_GUIDE.md).
 
 ## Fastest route: Claude Code (no download)
 
@@ -19,7 +19,7 @@ Open the AI project you want reviewed in Claude Code and paste:
 ```text
 The open folder is the AI project I want reviewed.
 
-Clone Cold Read from https://github.com/DooceyBoy/cold-read into a temporary folder outside my project. Use all six Markdown files inside cold-read/ as the review instructions, with rules.md as final authority.
+Clone Cold Read from https://github.com/DooceyBoy/cold-read into a temporary folder outside my project. Use all seven Markdown files inside cold-read/ as the review instructions, with rules.md as final authority.
 
 Do not copy anything into, edit, or rewrite my project. Ask whether I want a Quick Review or Full Review.
 ```
@@ -43,13 +43,14 @@ cold-read/
 ├── examples.md
 ├── reference/
 │   ├── architecture-judgments.md
-│   └── findings-and-labels.md
+│   ├── findings-and-labels.md
+│   └── intake-and-review-modes.md
 └── README.md
 ```
 
 **2. Create a new Claude Project.**
 
-Add the `cold-read/` folder to the Project's knowledge. If the interface asks you to select files rather than a folder, add all six Markdown files shown above and keep the two reference filenames identifiable.
+Add the `cold-read/` folder to the Project's knowledge. If the interface asks you to select files rather than a folder, add all seven Markdown files shown above and keep the three reference filenames identifiable.
 
 Each part has one job: identity defines the editor, rules own the critique procedure, examples demonstrate good critique, reference holds the frameworks used during judgment, and README explains use. `rules.md` is the final authority on behaviour.
 
@@ -103,7 +104,7 @@ Cold Read points at the exact place something breaks, explains the consequence, 
 
 ## Development evidence
 
-These public records summarise checks completed while building Cold Read. They are supporting evidence, not unfinished builds, separate editions, or demo downloads. The finished public version is **v0.1.2**, and the editor users install is the six-file bundle in [`cold-read/`](cold-read/).
+These public records summarise checks completed while building Cold Read. They are supporting evidence, not unfinished builds, separate editions, or demo downloads. The editor users install is the seven-file bundle in [`cold-read/`](cold-read/).
 
 - [Independent challenge test](receipts/public/independent-challenge-test.md) — ten independently scored, isolated runs; all ten passed.
 - [Self-review test](receipts/public/self-review-test.md) — Cold Read reviewing its own six-file editor and holding its read-only, no-invented-findings boundary.

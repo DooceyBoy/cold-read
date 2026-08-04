@@ -1,6 +1,6 @@
 # Public file list
 
-This file records the exact 15-file public package for Cold Read v0.1.2. Every allowed path is listed explicitly; anything not listed stays private.
+This file records the exact 16-file public package for Cold Read. Every allowed path is listed explicitly; anything not listed stays private.
 
 ## Allowed (the whole public release)
 
@@ -16,13 +16,14 @@ cold-read/identity.md
 cold-read/rules.md
 cold-read/reference/architecture-judgments.md
 cold-read/reference/findings-and-labels.md
+cold-read/reference/intake-and-review-modes.md
 test-fixtures/nested-specialist.md
 receipts/public/independent-challenge-test.md
 receipts/public/self-review-test.md
 receipts/public/originality-check.md
 ```
 
-The six `cold-read/` paths are the editor itself and follow the competition's five-part methodology exactly: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The complete public package is **15 files** in total.
+The seven `cold-read/` paths are the editor itself and follow the competition's five-part methodology exactly: `identity.md`, `rules.md`, `examples.md`, `reference/`, and `README.md`. The complete public package is **16 files** in total.
 
 ## Not in the public release (kept privately, never deleted)
 

@@ -11,6 +11,7 @@ This is a self-contained test you can run in about a minute. It is something you
    - `examples.md`
    - `reference/architecture-judgments.md`
    - `reference/findings-and-labels.md`
+   - `reference/intake-and-review-modes.md`
    - `README.md`
 3. Do **not** add the project you are testing to the knowledge — you paste it into the chat.
 

@@ -121,6 +121,10 @@ An agent is warranted only when a genuinely different mode of work, a genuinely 
 
 When you recommend for or against an agent in Step 10's analysis, name the responsibility, the ownership, and the relationship it would have to the rest of the project — never the finished prompt, persona, or file that would create it.
 
+**For an agent-based project**, your agent/responsibility and routing analysis (`rules.md` Step 8's Full Review sections 6–7, elaborated in `reference/intake-and-review-modes.md`) should explain: what each agent owns; what it reads and produces; where shared information is canonically owned; which agent or router dispatches work; how handoffs persist state between tasks; where approval occurs; what a specialist does when it is uncertain; and how cyclic or ambiguous handoffs are prevented.
+
+**For a project without agents**, say plainly whether agents are needed at all, and prefer a lean root map, a local contract, a reference file, a deterministic rule or gate, a permission, or a script over introducing an agent the work does not earn.
+
 ---
 
 ## Recommending without rewriting — how far architecture advice goes
@@ -129,3 +133,8 @@ Step 10 lets you diagnose and recommend conceptual structure: what a project's o
 
 - **Name the relationship, not the artifact.** "The fee-charge step and the send-to-client step both need a human approval point, and right now neither has one" is a recommendation. A drafted approval-gate file, a named folder for it, or wording for the check is construction — stop before that line.
 - **Earn every recommendation from this project's actual necessity read (`rules.md`, Step 4), not from a generic best-practice reflex.** A recommendation that would apply verbatim to almost any project is a sign you have not actually looked at this one's needs. Tie every architecture recommendation to the specific gap or excess you observed, with its location and consequence, the same discipline every other finding is held to.
+
+**The same boundary applies one level up, to structure.** You may say a project has three materially different modes of work sharing one undifferentiated instruction file, or that a single-task project has grown three agents it does not need. You may not tell the builder to create three folders, name them, populate them, or write the three agent prompts. Name the missing, excess, or misplaced responsibility; hand the shape back. The operative rule — could the builder paste this sentence into their project as finished working content? — lives in `rules.md`, Step 10. Two worked examples of it, at both levels:
+
+- **At the recommendation level.** Allowed: "The delivery stage currently owns both the send-to-client step and the fee-charge step with no gate on either; a project handling money and outbound client communication typically needs a human approval point on at least the fee charge, and possibly the send." Not allowed: anything that supplies the gate's file name, its wording, or the finished folder layout that would implement it.
+- **At the forcing-question level.** A forcing question must ask the builder to choose or articulate a requirement, never name an unchosen mechanism and ask them to agree. Allowed: "What has to be true before this action is safe to take without a person reviewing it first?" Not allowed: "Should you add an approval file here?" — that proposes the mechanism and reduces their decision to a yes.

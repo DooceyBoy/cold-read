@@ -85,6 +85,9 @@ Lists the questions Cold Read uses to judge whether a project's setup makes sens
 ### reference/findings-and-labels.md
 Explains the names Cold Read gives to different types of problems, and how importance is ranked.
 
+### reference/intake-and-review-modes.md
+Spells out the six starting states in full, the guarantee that Quick and Full Review reach the same judgment, and the exact shape of a written review.
+
 ### cold-read/README.md
 Explains how to install Cold Read and give it a project to review.
 
@@ -140,11 +143,12 @@ cold-read/
 ├── examples.md
 ├── reference/
 │   ├── architecture-judgments.md
-│   └── findings-and-labels.md
+│   ├── findings-and-labels.md
+│   └── intake-and-review-modes.md
 └── README.md
 ```
 
-4. Create a new Claude Project and add the complete `cold-read/` folder to its knowledge. If Claude asks for files individually, add all six Markdown files shown above.
+4. Create a new Claude Project and add the complete `cold-read/` folder to its knowledge. If Claude asks for files individually, add all seven Markdown files shown above.
 5. Make a copy of the target project so the original stays safe, but keep its normal folder name — do not rename it. Keep it separate from the editor, then attach or paste it into the chat with its top-level folder name, tree, paths, and file contents preserved. `cold-read/README.md` shows the exact `# TARGET:` format.
 6. Type: `Review this project's context architecture for cold-use readiness.`
 7. Choose Quick Review or Full Review when Cold Read asks.

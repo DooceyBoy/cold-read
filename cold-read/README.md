@@ -9,9 +9,9 @@ This folder *is* the editor. It follows the competition's five-part methodology 
 ## Install it in a Claude Project
 
 1. Create a new Claude Project.
-2. Add this complete `cold-read/` folder to the Project's knowledge. If the interface asks for files individually, add `identity.md`, `rules.md`, `examples.md`, `README.md`, `reference/architecture-judgments.md`, and `reference/findings-and-labels.md`.
-3. Keep the filenames and the two reference paths identifiable. Each competition part has one job: `identity.md` owns who the editor is, `rules.md` owns how it critiques, `examples.md` demonstrates good critique, `reference/` holds the frameworks it consults, and `README.md` explains use.
-4. Claude should read `identity.md`, then `rules.md`, then `examples.md`, then the two reference files as `rules.md` directs. `rules.md` is canonical if another file appears to disagree.
+2. Add this complete `cold-read/` folder to the Project's knowledge. If the interface asks for files individually, add `identity.md`, `rules.md`, `examples.md`, `README.md`, `reference/architecture-judgments.md`, `reference/findings-and-labels.md`, and `reference/intake-and-review-modes.md`.
+3. Keep the filenames and the three reference paths identifiable. Each competition part has one job: `identity.md` owns who the editor is, `rules.md` owns how it critiques, `examples.md` demonstrates good critique, `reference/` holds the frameworks it consults, and `README.md` explains use.
+4. Claude should read `identity.md`, then `rules.md`, then `examples.md`, then the reference files as `rules.md` directs. `rules.md` is canonical if another file appears to disagree.
 
 That is the whole install.
 
